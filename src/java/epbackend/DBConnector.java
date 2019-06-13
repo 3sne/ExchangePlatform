@@ -11,20 +11,20 @@ public class DBConnector {
     final static private String db_worker_password = "letmein";
 
     public static void main(String[] args) {
-        Connection test_conn = getCon();
+        getCon();
     }
 
     public static Connection getCon() {
         Connection connection = null;
         try {
-
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(db_url, db_worker_name, db_worker_password);
-            System.out.println("connected.....");
-            
+            System.out.println("Connection Successful");
         } catch (ClassNotFoundException ex) {
+            System.out.println("Oopsie1");
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            System.out.println("Oopsie2");
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         return connection;

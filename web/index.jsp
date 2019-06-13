@@ -116,7 +116,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-paper-plane"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Email" type="email">
+                                        <input id= "login-modal-email" class="form-control" placeholder="Email" type="email">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -124,7 +124,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Password" type="password">
+                                        <input id="login-modal-pass" class="form-control" placeholder="Password" type="password">
                                     </div>
                                 </div>
                                 <!-- <div class="text-muted font-italic"><small>password strength: <span
@@ -142,7 +142,7 @@
                                     </div>
                                 </div> -->
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary mt-4">Log In</button>
+                                    <button id="login-modal-btn" type="button" class="btn btn-primary mt-4">Log In</button>
                                 </div>
                             </form>
                         </div>
