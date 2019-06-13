@@ -17,54 +17,32 @@
             width: 100%;
             overflow: hidden;
             background-image: url("assets/images/dark-bg-1.png");
+            background-attachment: fixed;
         }
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar sticky-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
+    <nav class="navbar sticky-top navbar-light bg-light">
+        <a class="navbar-brand ml-lg-5" href="#">
             <i class="fas fa-camera"></i>
             Bootstrap
         </a>
-        <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#signIn"><i
-                class="fas fa-dollar-sign"></i> Sell</button>
-    </nav>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
 
-    <!-- <div class="modal fade" id="signIn" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Sign In to post Ad</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Email *" value="" />
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *" value="" />
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Login" />
-                            <input type="submit" class="btn btn-secondary" value="Create New Account" />
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="ForgetPwd">Forget Password?</a>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-
-                </div>
-            </div>
+        <div class="form-inline">
+            <button class="btn btn-outline-primary mr-2" type="button" data-toggle="modal"
+                data-target="#signIn">Login</button>
+            <button class="btn btn-primary mr-lg-5" type="button" data-toggle="modal" data-target="#signIn">
+                <i class="fas fa-dollar-sign"></i> Sell
+            </button>
         </div>
-    </div> -->
+
+    </nav>
 
     <div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
@@ -94,7 +72,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-user"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Name" type="text">
+                                        <input class="form-control shadow" placeholder="Name" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -156,8 +134,8 @@
         <div class="row justify-content-center mt-3">
             <div class="col-md-4">
                 <div class="card shadow">
+                    <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                         <h4 class="card-title">Card title</h4>
                         <p class="card-text">
                             Some quick example text to build on the card title
@@ -169,8 +147,8 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
+                    <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                         <h4 class="card-title">Card title</h4>
                         <p class="card-text">
                             Some quick example text to build on the card title
@@ -182,8 +160,8 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
+                    <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                         <h4 class="card-title">Card title</h4>
                         <p class="card-text">
                             Some quick example text to build on the card title
@@ -197,8 +175,8 @@
         <div class="row justify-content-center mt-3">
             <div class="col-md-4">
                 <div class="card">
+                    <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                         <h4 class="card-title">Card title</h4>
                         <p class="card-text">
                             Some quick example text to build on the card title
@@ -210,8 +188,8 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
+                    <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                         <h4 class="card-title">Card title</h4>
                         <p class="card-text">
                             Some quick example text to build on the card title
@@ -223,8 +201,8 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
+                    <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
                         <h4 class="card-title">Card title</h4>
                         <p class="card-text">
                             Some quick example text to build on the card title
