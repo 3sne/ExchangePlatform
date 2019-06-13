@@ -190,8 +190,10 @@
 
     <!-- BUFFER BEFORE ADS -->
     <div class="container-fluid">
-        <div class="row">
-            <div id="first-img"></div>
+        <div class="row justify-content-center">
+            <div id="first-img" class="d-flex text-center justify-content-center align-items-center">
+                <p class="display-3" style="color: white">Say goodbye to your Notes.</p>
+            </div>
         </div>
     </div>
 
@@ -447,7 +449,10 @@
                     </div>
                     <!-- Grid row -->
                 </div>
-                <div class="footer-copyright text-center py-3"> © 2019 Copyright: ExchangePlatform Inc
+                <div class="footer-copyright text-center text-muted py-3">
+                    All icons provided by <a href="https://fontawesome.com/license" target="_blank">fontawesome.com</a>, under Creative
+                    Commons Attribution
+                    4.0
                 </div>
                 <!-- Copyright -->
             </div>
@@ -457,15 +462,17 @@
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    <!-- UNCOMMENT BEFORE LAUNCH <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
+    <script src="assets/external-scripts/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="scripts/ajax_helper_main.js"></script>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/9c19a5120e.js"></script>
