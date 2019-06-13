@@ -1,32 +1,258 @@
-<%-- 
-    Document   : index
-    Created on : Jun 13, 2019, 10:31:37 AM
-    Author     : Mukur Panchani
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Exchange Platform</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- BOOTSTRAP CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <title>Hello, world!</title>
+    <style>
+        #first-img {
+            height: 250px;
+            width: 100%;
+            overflow: hidden;
+            background-image: url("assets/images/dark-bg-1.png");
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Hello World!</h1>
+
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-camera"></i>
+            Bootstrap
+        </a>
+        <button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#signIn"><i
+                class="fas fa-dollar-sign"></i> Sell</button>
+    </nav>
+
+    <!-- <div class="modal fade" id="signIn" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sign In to post Ad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Email *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Your Password *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Login" />
+                            <input type="submit" class="btn btn-secondary" value="Create New Account" />
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="ForgetPwd">Forget Password?</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sign In to post Ad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Table -->
+
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <!-- <div class="card">
+                                    <div class="card-header bg-transparent pb-5"></div> 
+                                    <div class="card-body px-lg-5 py-lg-5"> -->
+                            <div class="text-center text-muted mb-4">
+                                <small>Sign Up with e-mail</small>
+                            </div>
+                            <form role="form">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Name" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-paper-plane"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Email" type="email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Password" type="password">
+                                    </div>
+                                </div>
+                                <div class="text-muted font-italic"><small>password strength: <span
+                                            class="text-success font-weight-700">strong</span></small></div>
+                                <div class="row my-4">
+                                    <div class="col-12">
+                                        <div class="custom-control custom-control-alternative custom-checkbox">
+                                            <input class="custom-control-input" id="customCheckRegister"
+                                                type="checkbox">
+                                            <label class="custom-control-label" for="customCheckRegister">
+                                                <span class="text-muted">I agree with the <a href="#!">Privacy
+                                                        Policy</a></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary mt-4">Create
+                                        account</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-    
-    <!-- BOOTSTRAP MINIFIED JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        </div>
+        <div class="modal-footer"></div>
+    </div>
+    </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div id="first-img"></div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/9c19a5120e.js"></script>
+
 </body>
 
 </html>
