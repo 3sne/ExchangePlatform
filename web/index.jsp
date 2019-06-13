@@ -12,6 +12,10 @@
 
     <title>Exchange Platform</title>
     <style>
+        body {
+            overflow-x: hidden;
+        }
+
         #first-img {
             height: 250px;
             width: 100%;
@@ -25,7 +29,7 @@
             display: block;
             position: absolute;
             overflow: hidden;
-            width: 110vw;
+            width: 120vw;
             height: 600px;
             background: #c31432;
             background: -webkit-linear-gradient(to right, #240b36, #c31432);
@@ -431,7 +435,7 @@
                             <h6 class="text-uppercase font-weight-bold">Contact</h6>
                             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                             <p>
-                                <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+                                <i class="fas fa-home mr-3"></i> Manipal, KA, India</p>
                             <p>
                                 <i class="fas fa-envelope mr-3"></i> info@explat.com</p>
                             <p>
