@@ -10,24 +10,42 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Exchange Platform</title>
     <style>
         #first-img {
             height: 250px;
             width: 100%;
             overflow: hidden;
-            background-image: url("assets/images/dark-bg-1.png");
-            background-attachment: fixed;
+            /* background-image: url("assets/images/color-bg-1.jpg");
+            background-attachment: fixed; */
+        }
+
+        #fancylinething {
+            z-index: -20;
+            display: block;
+            position: absolute;
+            overflow: hidden;
+            width: 110vw;
+            height: 600px;
+            background: #c31432;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            left: -10%;
+            -webkit-transform: rotate(-4deg);
+            -moz-transform: rotate(-4deg);
+            transform: rotate(-4deg);
         }
     </style>
 </head>
 
 <body>
-
+    <div id="fancylinething">
+    </div>
     <nav class="navbar sticky-top navbar-light bg-light">
         <a class="navbar-brand ml-lg-5" href="#">
             <i class="fas fa-camera"></i>
-            Bootstrap
+            ExchangePlatform
         </a>
         <form class="form-inline">
             <input class="form-control mr-sm-2" type="search" placeholder="Search">
@@ -55,14 +73,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
-                    <!-- Table -->
-
                     <div class="row justify-content-center">
                         <div class="col-12">
-                            <!-- <div class="card">
-                                    <div class="card-header bg-transparent pb-5"></div> 
-                                    <div class="card-body px-lg-5 py-lg-5"> -->
                             <div class="text-center text-muted mb-4">
                                 <small>Sign Up with e-mail</small>
                             </div>
