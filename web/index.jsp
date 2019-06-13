@@ -27,9 +27,12 @@
             overflow: hidden;
             width: 110vw;
             height: 600px;
-            background: #c31432;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: #c31432;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #240b36, #c31432);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #240b36, #c31432);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
             left: -10%;
             -webkit-transform: rotate(-4deg);
@@ -40,12 +43,15 @@
 </head>
 
 <body>
-    <div id="fancylinething">
-    </div>
+
+    <!-- BACKGROUND TILT -->
+    <div id="fancylinething"></div>
+
+    <!-- NAVBAR -->
     <nav class="navbar sticky-top navbar-light bg-light">
         <a class="navbar-brand ml-lg-5" href="#">
             <i class="fas fa-camera"></i>
-            ExchangePlatform
+            <span class="ml-lg-2 ml-1">ExchangePlatform</span>
         </a>
         <form class="form-inline">
             <input class="form-control mr-sm-2" type="search" placeholder="Search">
@@ -56,12 +62,14 @@
             <button class="btn btn-outline-primary mr-2" type="button" data-toggle="modal"
                 data-target="#signIn">Login</button>
             <button class="btn btn-primary mr-lg-5" type="button" data-toggle="modal" data-target="#signIn">
-                <i class="fas fa-dollar-sign"></i> Sell
+                <i class="fas fa-dollar-sign"></i>
+                <span class="ml-1 pr-1">Sell</span>
             </button>
         </div>
 
     </nav>
 
+    <!-- MODAL -->
     <div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -126,23 +134,20 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-        <div class="modal-footer"></div>
     </div>
     </div>
     </div>
 
-
+    <!-- BUFFER BEFORE ADS -->
     <div class="container-fluid">
         <div class="row">
             <div id="first-img"></div>
         </div>
     </div>
 
+    <!-- AD CONTAINER -->
     <div class="container">
-
         <div class="row justify-content-center mt-3">
             <div class="col-md-4">
                 <div class="card shadow">
