@@ -9,14 +9,13 @@
 session.setAttribute("theemail", email);*/
 String currentUser = (String) session.getAttribute("currentUser");
 
-if (un != null) {
+if (currentUser != null) {
     System.out.println("JSP ++ " + currentUser);
-%>
-    <script>
-        loginSuccessUiChange();
-    </script>
-<%
+    //<script>
+      //  loginSuccessUiChange();
+    //</script>
 } else {
+    currentUser = "";
     System.out.println("No user identified, session invalid");
 }
 
@@ -80,7 +79,7 @@ if (un != null) {
 </head>
 
 <body>
-    <input type="hidden" name="test-box" value="<%=un%>" />
+    <input type="hidden" id="session_uname_capture" name="session_uname_capture" value="<%=currentUser%>" />
     <!-- BACKGROUND TILT -->
     <div id="fancylinething"></div>
 
@@ -507,13 +506,13 @@ if (un != null) {
     <script src="https://kit.fontawesome.com/9c19a5120e.js"></script>
 
     <script type="text/html" id="template">
-        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+        <button id="dd-toggle" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false" data-content="username">
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <button class="dropdown-item" type="button">My Ads</button>
             <button class="dropdown-item" type="button">Settings</button>
-            <button class="dropdown-item" type="button">Logout</button>
+            <button class="dropdown-item" type="button" id="dd-user-logout">Logout</button>
         </div>
     </script>
 

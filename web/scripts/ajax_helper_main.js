@@ -1,7 +1,7 @@
 let USERNAME;
 
 $(document).ready(function () {
-    console.log("From jQuery");    
+    console.log("From jQuery");
     $("#login-modal-btn").click(() => {
         let e = $("#login-modal-email").val();
         let p = $("#login-modal-pass").val();
@@ -19,7 +19,7 @@ $(document).ready(function () {
                         console.log("OUR USER IS: ", sResp.username);
                         $('#logInModal').modal('hide');
                         USERNAME = sResp.username;
-                        loginSuccessUiChange();
+                        location = location;
                     } else if (sResp.code === 101) {
                         console.log("[AJAX] Login Unsuccessful");
                         $("#login-modal-pass").val("");
@@ -36,11 +36,48 @@ $(document).ready(function () {
 
         }
     });
+
+    $('#session_uname_capture').bind('input', function () {
+        console.log($("#session_uname_capture").val() + " << TRIGGER");
+    });
+
+    if ($("#session_uname_capture").val() != "") {
+        USERNAME = $("#session_uname_capture").val();
+        loginSuccessUiChange(USERNAME);
+    }
+
 });
 
-function loginSuccessUiChange() {
+function loginSuccessUiChange(data) {
+    USERNAME = $("#session_uname_capture").val();
     $("#navbar-login-btn").remove();
     $("#loadUserButton").loadTemplate($("#template"), {
-        username: USERNAME
+        username: data
     }).css("visibility", "visible");
+
+    $("#dd-user-logout").click(event, () => {
+        console.log(event);
+        console.log("here");
+        let reqUrl = 'http://localhost:8084/ExchangePlatform/logout';
+        let reqLoad = {
+            data: {},
+            success: (data) => {
+                let sResp = $.parseJSON(data);
+                console.log(sResp);
+                if (sResp.code === 100) {
+                    console.log("[AJAX] Logout Successful");
+                    location = location;
+                } else {
+                    console.log("[AJAX] Logout Unsuccessful");
+                }
+            },
+            failure: (data) => {
+                console.log("[ERROR] Path: /logout | ajax failure", data);
+            }
+        };
+        $.ajax(reqUrl, reqLoad).done(() => {
+            console.log("Ajax attempt complete");
+        });
+    });
+
 };
