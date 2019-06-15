@@ -22,7 +22,7 @@ if (currentUser != null) {
 %>
 
 <html lang="en">
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">

@@ -22,23 +22,25 @@ $(document).ready(function () {
         success: (data) => {
             recvAdData = data;
             console.log(recvAdData);
-
-            for (let i = row_id_indexer; i < row_id_indexer + 4; i++) {
-                $("#ad_row_" + i).html('');
-                $("#ad_container_custom").append('<div id="ad_row_' + i + '" class="row justify-content-center mt-3">');
-                for (let j = 0; j < 3; j++) {
-                    let conc_obj = recvAdData.ad_list[i * 3 + j];
-                    ad_fetched_already.push(conc_obj.ad_id);
-                    let ad_title = conc_obj.ad_title;
-                    let ad_desc = conc_obj.ad_desc;
-                    let ad_price = conc_obj.ad_price;
-                    let ad_location = conc_obj.ad_location;
-                    let appendAdHtmlCode = '<div class="col-md-4"><div class="card mp-mat-sha-1"><img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap"><div class="card-body"><h4 class="card-title" data-content="ad_title">'+ ad_title + '</h4><p class="card-text" style="max-height: 150px" data-content="ad_desc">' + ad_desc + '</p><p class="card-text h3" data-content="ad_price">' + ad_price + '</p><small class="card-text text-muted" data-content="ad_location">' + ad_location + '</small></div></div></div>';
-                    $("#ad_row_" + i).append(appendAdHtmlCode);
+            if( recvAdData.code == 100) {
+                for (let i = row_id_indexer; i < row_id_indexer + 4; i++) {
+                    $("#ad_row_" + i).html('');
+                    $("#ad_container_custom").append('<div id="ad_row_' + i + '" class="row justify-content-center mt-3">');
+                    for (let j = 0; j < 3; j++) {
+                        let conc_obj = recvAdData.ad_list[i * 3 + j];
+                        ad_fetched_already.push(conc_obj.ad_id);
+                        let ad_title = conc_obj.ad_title;
+                        let ad_desc = conc_obj.ad_desc;
+                        let ad_price = conc_obj.ad_price;
+                        let ad_location = conc_obj.ad_location;
+                        let appendAdHtmlCode = '<div class="col-md-4"><div class="card mp-mat-sha-1"><img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap"><div class="card-body"><h4 class="card-title" data-content="ad_price">&#8377; '+ ad_price + '</h4><p class="card-subtitle" data-content="ad_title">' + ad_title + '</p></div><div class="card-footer text-muted"><div class="row"><p class="col-6 my-auto">15 June</p><p class="col-6 my-auto text-right">Manipal, KA</p></div></div></div></div>';
+                        $("#ad_row_" + i).append(appendAdHtmlCode);
+                    }
                 }
+                row_id_indexer += 4;
+            } else {
+                console.log("No more ads to display :)");
             }
-            row_id_indexer += 4;
-
         }
     }
     $.ajax(ad_fetch_url, ad_fetch_payload).done(()=>{
@@ -54,21 +56,25 @@ $(document).ready(function () {
         success: (data) => {
             recvAdData = data;
             console.log(recvAdData);
-            for (let i = row_id_indexer; i < row_id_indexer + 4; i++) {
-                $("#ad_row_" + i).html('');
-                $("#ad_container_custom").append('<div id="ad_row_' + i + '" class="row justify-content-center mt-3">');
-                for (let j = 0; j < 3; j++) {
-                    let index = (i - row_id_indexer) * 3 + j;
-                    console.log(index);
-                    let conc_obj = recvAdData.ad_list[index];
-                    ad_fetched_already.push(conc_obj.ad_id);
-                    let ad_title = conc_obj.ad_title;
-                    let ad_desc = conc_obj.ad_desc;
-                    let ad_price = conc_obj.ad_price;
-                    let ad_location = conc_obj.ad_location;
-                    let appendAdHtmlCode = '<div class="col-md-4"><div class="card mp-mat-sha-1"><img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap"><div class="card-body"><h4 class="card-title" data-content="ad_title">'+ ad_title + '</h4><p class="card-text" style="max-height: 150px" data-content="ad_desc">' + ad_desc + '</p><p class="card-text h3" data-content="ad_price">' + ad_price + '</p><small class="card-text text-muted" data-content="ad_location">' + ad_location + '</small></div></div></div>';
-                    $("#ad_row_" + i).append(appendAdHtmlCode);
+            if( recvAdData.code == 100) {
+                for (let i = row_id_indexer; i < row_id_indexer + 4; i++) {
+                    $("#ad_row_" + i).html('');
+                    $("#ad_container_custom").append('<div id="ad_row_' + i + '" class="row justify-content-center mt-3">');
+                    for (let j = 0; j < 3; j++) {
+                        let index = (i - row_id_indexer) * 3 + j;
+                        console.log(index);
+                        let conc_obj = recvAdData.ad_list[index];
+                        ad_fetched_already.push(conc_obj.ad_id);
+                        let ad_title = conc_obj.ad_title;
+                        let ad_desc = conc_obj.ad_desc;
+                        let ad_price = conc_obj.ad_price;
+                        let ad_location = conc_obj.ad_location;
+                        let appendAdHtmlCode = '<div class="col-md-4"><div class="card mp-mat-sha-1"><img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap"><div class="card-body"><h4 class="card-title" data-content="ad_title">&#8377; '+ ad_price + '</h4><p class="card-subtitle" data-content="ad_title">' + ad_title + '</p></div><div class="card-footer text-muted"><div class="row"><p class="col-6 my-auto">15 June</p><p class="col-6 my-auto text-right">Manipal, KA</p></div></div></div>';
+                        $("#ad_row_" + i).append(appendAdHtmlCode);
+                    }
                 }
+            } else {
+                console.log("No more ads to display :)");
             }
             row_id_indexer += 4;
         }
