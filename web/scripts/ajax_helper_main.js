@@ -2,6 +2,24 @@ let USERNAME;
 
 $(document).ready(function () {
     console.log("From jQuery");
+
+    //Ad Loader
+    for (let i = 1; i < 4; i++) {
+        $("#ad_row_" + i).html('');
+        $("#ad_container_custom").append('<div id="ad_row_' + i + '" class="row justify-content-center mt-3">');
+        for (let j = 1; j <= 3; j++) {
+            let appendAdHtmlCode = '';
+            let ad_title = 'Car for Sale';
+            let ad_desc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam libero lorem, ultricies lacinia nibh ac, sagittis porta ante. Donec maximus malesuada aliquet. Nulla sit amet ligula in tellus imperdiet pulvinar. Phasellus efficitur magna non mi interdum, id commodo nisi consequat. Aenean pretium a quam in scelerisque. Aliquam egestas vitae erat eget tristique.';
+            let ad_price = 'Rs. 200000';
+            let ad_location = 'Manipal, KA';
+            $("#ad_row_" + i).append('<div class="col-md-4"><div class="card mp-mat-sha-1"><img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap"><div class="card-body"><h4 class="card-title" data-content="ad_title">'+ ad_title + '</h4><p class="card-text" data-content="ad_desc">' + ad_desc + '</p><p class="card-text h3" data-content="ad_price">' + ad_price + '</p><small class="card-text text-muted" data-content="ad_location">' + ad_location + '</small></div></div></div>');
+        }
+    }
+
+
+
+    //Login Handler
     $("#login-modal-btn").click(() => {
         let e = $("#login-modal-email").val();
         let p = $("#login-modal-pass").val();

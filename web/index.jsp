@@ -225,7 +225,7 @@ if (currentUser != null) {
     </div>
 
     <!-- AD CONTAINER -->
-    <div class="container">
+    <div id="ad_container_custom" class="container">
         <div class="row justify-content-center mt-3">
             <div class="col-md-4">
                 <div class="card mp-mat-sha-1">
@@ -515,6 +515,24 @@ if (currentUser != null) {
             <button class="dropdown-item" type="button" id="dd-user-logout">Logout</button>
         </div>
     </script>
+
+    <%-- <script type="text/html" id="generic_ad_template">
+        <div class="col-md-4">
+                <div class="card mp-mat-sha-1">
+                    <img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title" data-content="ad_title">Card title</h4>
+                        <p class="card-text" data-content="ad_desc">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                        </p>
+                        <p class="card-text h3" data-content="ad_price">
+                        <small class="card-text text-muted" data-content="ad_location"></small>
+                    </div>
+                </div>
+            </div>
+    </script> --%>
+
 
 </body>
 
