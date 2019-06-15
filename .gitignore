@@ -4,4 +4,5 @@ build.xml
 lib
 .vscode/
 /dist/
-codepb-jquery-template-1.5.10-8-g0164215
+codepb-jquery-template-1.5.10-8-g0164215/
+playground
