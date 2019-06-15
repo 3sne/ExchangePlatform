@@ -226,8 +226,12 @@ if (currentUser != null) {
 
     <!-- AD CONTAINER -->
     <div id="ad_container_custom" class="container">
-        <div class="row justify-content-center mt-3">
-            <button class="btn btn-outline-primary my-2" type="button">Show More</button>
+        
+    </div>
+
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <button id="more_ad_loader" class="btn btn-outline-primary my-2" type="button">Show More</button>
         </div>
     </div>
 
