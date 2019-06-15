@@ -4,18 +4,45 @@ $(document).ready(function () {
     console.log("From jQuery");
 
     //Ad Loader
-    for (let i = 1; i < 4; i++) {
-        $("#ad_row_" + i).html('');
-        $("#ad_container_custom").append('<div id="ad_row_' + i + '" class="row justify-content-center mt-3">');
-        for (let j = 1; j <= 3; j++) {
-            let appendAdHtmlCode = '';
-            let ad_title = 'Car for Sale';
-            let ad_desc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam libero lorem, ultricies lacinia nibh ac, sagittis porta ante. Donec maximus malesuada aliquet. Nulla sit amet ligula in tellus imperdiet pulvinar. Phasellus efficitur magna non mi interdum, id commodo nisi consequat. Aenean pretium a quam in scelerisque. Aliquam egestas vitae erat eget tristique.';
-            let ad_price = 'Rs. 200000';
-            let ad_location = 'Manipal, KA';
-            $("#ad_row_" + i).append('<div class="col-md-4"><div class="card mp-mat-sha-1"><img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap"><div class="card-body"><h4 class="card-title" data-content="ad_title">'+ ad_title + '</h4><p class="card-text" data-content="ad_desc">' + ad_desc + '</p><p class="card-text h3" data-content="ad_price">' + ad_price + '</p><small class="card-text text-muted" data-content="ad_location">' + ad_location + '</small></div></div></div>');
+    let row_id_indexer = 0;
+    let ad_fetched_already = [];
+    const ad_fetch_url = 'http://localhost:8084/ExchangePlatform/adfetch';
+    let ad_fetch_data = {
+        'max_ad_count' : '12',
+        'ad_except': ad_fetched_already
+    };
+
+    console.log("JSON ", JSON.stringify(ad_fetch_data));
+
+    let ad_fetch_payload = {
+        url: ad_fetch_url,
+        type: 'POST',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(ad_fetch_data),
+        success: (data) => {
+            recvAdData = data;
+            console.log(recvAdData);
+
+            for (let i = row_id_indexer; i < row_id_indexer + 4; i++) {
+                $("#ad_row_" + i).html('');
+                $("#ad_container_custom").append('<div id="ad_row_' + i + '" class="row justify-content-center mt-3">');
+                for (let j = 0; j < 3; j++) {
+                    let conc_obj = recvAdData.ad_list[i * 3 + j];
+                    let ad_title = conc_obj.ad_title;
+                    let ad_desc = conc_obj.ad_desc;
+                    let ad_price = conc_obj.ad_price;
+                    let ad_location = conc_obj.ad_location;
+                    let appendAdHtmlCode = '<div class="col-md-4"><div class="card mp-mat-sha-1"><img class="card-img-top" src="assets/images/dark-card-bg-test.jpg" alt="Card image cap"><div class="card-body"><h4 class="card-title" data-content="ad_title">'+ ad_title + '</h4><p class="card-text" style="max-height: 150px" data-content="ad_desc">' + ad_desc + '</p><p class="card-text h3" data-content="ad_price">' + ad_price + '</p><small class="card-text text-muted" data-content="ad_location">' + ad_location + '</small></div></div></div>';
+                    $("#ad_row_" + i).append(appendAdHtmlCode);
+                }
+            }
         }
     }
+    $.ajax(ad_fetch_url, ad_fetch_payload).done(()=>{
+        console.log("[AJAX] DONE AD FETCH");
+    });
+
+    
 
 
 
