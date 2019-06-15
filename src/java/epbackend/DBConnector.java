@@ -15,7 +15,9 @@ public class DBConnector {
     }
 
     public static Connection getCon() {
+        
         Connection connection = null;
+        
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(db_url, db_worker_name, db_worker_password);
@@ -26,7 +28,8 @@ public class DBConnector {
         } catch (SQLException ex) {
             System.out.println("Oopsie2");
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
+        
         return connection;
     }
 }

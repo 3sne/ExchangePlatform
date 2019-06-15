@@ -1,4 +1,27 @@
 <!doctype html>
+
+<%@ page import="java.util.*" %>
+
+<%
+//String name1 = request.getParameter("uname");
+//session.setAttribute("name1", name1);
+     /* String email = request.getParameter("mail");
+session.setAttribute("theemail", email);*/
+String currentUser = (String) session.getAttribute("currentUser");
+
+if (un != null) {
+    System.out.println("JSP ++ " + currentUser);
+%>
+    <script>
+        loginSuccessUiChange();
+    </script>
+<%
+} else {
+    System.out.println("No user identified, session invalid");
+}
+
+%>
+
 <html lang="en">
 
 <head>
@@ -57,7 +80,7 @@
 </head>
 
 <body>
-
+    <input type="hidden" name="test-box" value="<%=un%>" />
     <!-- BACKGROUND TILT -->
     <div id="fancylinething"></div>
 
@@ -73,8 +96,10 @@
         </form>
 
         <div class="form-inline">
-            <button class="btn btn-outline-primary mr-2" type="button" data-toggle="modal"
+            <button id="navbar-login-btn" class="btn btn-outline-primary mr-2" type="button" data-toggle="modal"
                 data-target="#logInModal">Login</button>
+            <div id="loadUserButton" class="btn-group mr-2" style="visibility: hidden;">
+            </div>
             <button class="btn btn-primary mr-lg-5" type="button" data-toggle="modal" data-target="#trySellingModal">
                 <i class="fas fa-dollar-sign"></i>
                 <span class="ml-1 pr-1">Sell</span>
@@ -145,6 +170,9 @@
                                     <button id="login-modal-btn" type="button" class="btn btn-primary mt-4">Log In</button>
                                 </div>
                             </form>
+                            <div class="text-center text-muted mt-2">
+                                <p id="login-modal-err-zone" style="color: red"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -472,10 +500,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="assets/external-scripts/jquery.loadTemplate.js"></script>
     <script src="scripts/ajax_helper_main.js"></script>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/9c19a5120e.js"></script>
+
+    <script type="text/html" id="template">
+        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" data-content="username">
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <button class="dropdown-item" type="button">My Ads</button>
+            <button class="dropdown-item" type="button">Settings</button>
+            <button class="dropdown-item" type="button">Logout</button>
+        </div>
+    </script>
 
 </body>
 

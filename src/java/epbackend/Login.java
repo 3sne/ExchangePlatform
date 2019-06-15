@@ -41,6 +41,11 @@ public class Login extends HttpServlet {
             String password = request.getParameter("password");
 
             Connection con = DBConnector.getCon();
+            if (con == null) {
+                out.println("<script type='text/javascript'>alert('Chimcken nugger');</script>");
+                out.close();
+                return;
+            }
             Statement loginSuccess = con.createStatement();
             Statement st1 = con.createStatement();
             ResultSet resultLoginSuccess, rs1;
@@ -50,12 +55,12 @@ public class Login extends HttpServlet {
                     .executeQuery("select * from user where email='" + email + "' and pword='" + password + "'");
 
             if (resultLoginSuccess.next()) { // success
-                System.out.println(resultLoginSuccess.toString());
-                String user = resultLoginSuccess.getString(2);
-                session.setAttribute("uname", user);
-                out.println("<script type='text/javascript'>alert('Login Successfull');</script>");
+                String user = resultLoginSuccess.getString(3);
+                System.out.println(user);
+                session.setAttribute("currentUser", user);
+                out.println("{\"code\": 100, \"data\": \"login-success\", \"username\": \"" + user + "\"}");
             } else {
-                out.println("<script type='text/javascript'>alert('Inavlid Username Or Password');</script>");
+                out.println("{\"code\": 101, \"data\": \"login-failure\"}");
             }
         } finally {
             out.close();
