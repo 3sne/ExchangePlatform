@@ -240,19 +240,15 @@ if (currentUserName != null) {
                 <div class="card mp-mat-sha-1 mt-4">
                     <div class="card-body">
                         <h1 class="h2">Description</h1>
-                        <p class="text-left">
-                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                        </p>
+                        <p id="ad_desc_holder" class="text-left"></p>               <%-- !! --%>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-lg-5">
                 <div class="card mp-mat-sha-1">
                     <div class="card-body">
-                        <h1 class="display-4">&#8377; 1000000</h1>
-                        <p class="text-left h5 text-muted">
-                            Chemistry Notes VI sem
-                        </p>
+                        <h1 id="ad_price_holder" class="display-4"></h1>             <%-- !! --%>
+                        <p id="ad_title_holder" class="text-left h5 text-muted"></p> <%-- !! --%>
                         <div class="row">
                             <p class="col-6 my-auto">15 June</p>
                             <p class="col-6 my-auto text-right">Manipal, KA</p>
@@ -263,7 +259,7 @@ if (currentUserName != null) {
                     <div class="card-body">
                         <h2 class="">Seller Description</h1>
                         <p class="text-left h5 text-muted" >
-                            <a href="">username</a>
+                            <a id="ad_uname_holder" href=""></a>                    <%-- !! --%>
                         </p>
                         <button class="btn btn-outline-success btn-block mt-3">Chat with Seller</button>
                     </div>

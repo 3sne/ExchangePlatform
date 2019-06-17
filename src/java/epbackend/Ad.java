@@ -37,6 +37,7 @@ public class Ad extends HttpServlet {
         String ad_desc;
         String ad_price;
         String ad_location;
+        String ad_poster_uname;
         boolean true_content;
     }
     
@@ -72,12 +73,13 @@ public class Ad extends HttpServlet {
             Statement adFetchQuery = con.createStatement();
             ResultSet adResult;
             System.out.println(req_ad_id);
-            adResult = adFetchQuery.executeQuery("select * from ads where adid = " + req_ad_id);
+            adResult = adFetchQuery.executeQuery("select * from ads,user where ads.adid=" + req_ad_id + " and ads.uid=user.uid");
             
             PostingZoomExport pze = new PostingZoomExport();
             if(adResult.next()){
                 pze.ad_id = adResult.getString("adid");
                 pze.ad_poster_id = adResult.getString("uid");
+                pze.ad_poster_uname = adResult.getString("uname");
                 pze.ad_category_id = adResult.getString("cid");
                 pze.ad_title = adResult.getString("title");
                 pze.ad_desc = adResult.getString("description");
