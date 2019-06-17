@@ -24,6 +24,7 @@ if (currentUserName != null) {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <title>Exchange Platform</title>
     <style>
         body {
@@ -73,10 +74,10 @@ if (currentUserName != null) {
 <body>
     <input type="hidden" id="session_uname_capture" name="session_uname_capture" value="<%=currentUserName%>" />
     <!-- BACKGROUND TILT -->
-    <div id="fancylinething"></div>
+    <%-- <div id="fancylinething"></div> --%>
 
     <!-- NAVBAR -->
-    <nav class="navbar sticky-top navbar-light bg-light">
+    <nav class="navbar sticky-top navbar-dark bg-dark">
         <a class="navbar-brand ml-lg-5" href="#">
             <i class="fas fa-camera"></i>
             <span class="ml-lg-2 ml-1">ExchangePlatform</span>
@@ -206,38 +207,80 @@ if (currentUserName != null) {
         </div>
     </div>
 
-
-    <!-- BUFFER BEFORE ADS -->
-    <div class="container-fluid">
+    <%-- AD ZOOMED IN --%>
+    <div id="zoom-container" class="container mt-4">
         <div class="row justify-content-center">
-            <div id="first-img" class="d-flex text-center justify-content-center align-items-center">
-                <p class="display-3" style="color: white">Say goodbye to your Notes.</p>
+            <div class="col-md-8 col-lg-7">
+                <div id="listing-image-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#listing-image-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#listing-image-carousel" data-slide-to="1"></li>
+                        <li data-target="#listing-image-carousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                        <img src="assets/images/dark-card-bg-test.jpg" class="d-block w-100" >
+                        </div>
+                        <div class="carousel-item">
+                        <img src="assets/images/dark-card-bg-test.jpg" class="d-block w-100" >
+                        </div>
+                        <div class="carousel-item">
+                        <img src="assets/images/dark-card-bg-test.jpg" class="d-block w-100" >
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#listing-image-carousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#listing-image-carousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="card mp-mat-sha-1 mt-4">
+                    <div class="card-body">
+                        <h1 class="h2">Description</h1>
+                        <p class="text-left">
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <!-- AD CONTAINER -->
-    <div id="ad_container_custom" class="container">
-        
-    </div>
-
-    <div class="container mt-3">
-        <div class="row justify-content-center">
-            <button id="more_ad_loader" class="btn btn-outline-primary my-2" type="button">Show More</button>
+            <div class="col-md-4 col-lg-5">
+                <div class="card mp-mat-sha-1">
+                    <div class="card-body">
+                        <h1 class="display-4">&#8377; 1000000</h1>
+                        <p class="text-left h5 text-muted">
+                            Chemistry Notes VI sem
+                        </p>
+                        <div class="row">
+                            <p class="col-6 my-auto">15 June</p>
+                            <p class="col-6 my-auto text-right">Manipal, KA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mp-mat-sha-1 mt-4">
+                    <div class="card-body">
+                        <h2 class="">Seller Description</h1>
+                        <p class="text-left h5 text-muted" >
+                            <a href="">username</a>
+                        </p>
+                        <button class="btn btn-outline-success btn-block mt-3">Chat with Seller</button>
+                    </div>
+                </div>
+                <div class="card mp-mat-sha-1 mt-4">
+                    <div class="card-body">
+                        <h2 class="">Placeholder Card</h1>
+                        <p class="text-left h5 text-muted" >
+                            This card is here because I may incorporate new features and stuff/
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- FOOTER -->
-
-    <!-- <div class="container-fluid">
-        <div class="row justify-content-center mt-2 mb-2 bg-light">
-            <div class="col-12 text-center">
-                <span>THIS IS THA FOOTAR</span>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- Footer -->
     <div class="container-fluid">
         <div class="row">
             <div class="page-footer font-small unique-color-dark col mt-4" style="padding: 0px;">
@@ -373,8 +416,8 @@ if (currentUserName != null) {
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="assets/external-scripts/jquery.loadTemplate.js"></script>
-    <script src="scripts/posting_loader.js"></script>
     <script src="scripts/ajax_helper_main.js"></script>
+    <script src="scripts/posting_zoom_helper.js"></script>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/9c19a5120e.js"></script>

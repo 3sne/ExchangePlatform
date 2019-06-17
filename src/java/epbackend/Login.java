@@ -55,10 +55,14 @@ public class Login extends HttpServlet {
                     .executeQuery("select * from user where email='" + email + "' and pword='" + password + "'");
 
             if (resultLoginSuccess.next()) { // success
-                String user = resultLoginSuccess.getString(3);
-                System.out.println(user);
-                session.setAttribute("currentUser", user);
-                out.println("{\"code\": 100, \"data\": \"login-success\", \"username\": \"" + user + "\"}");
+                String rUser = resultLoginSuccess.getString("uname");
+                String rEmail = resultLoginSuccess.getString("email");
+                String rUid = resultLoginSuccess.getString("uid");
+                System.out.println(rUser);
+                session.setAttribute("currentUserName", rUser);
+                session.setAttribute("currentUserId", rUid);
+                session.setAttribute("currentUserEmail", rEmail);
+                out.println("{\"code\": 100, \"data\": \"login-success\", \"username\": \"" + rUser + "\"}");
             } else {
                 out.println("{\"code\": 101, \"data\": \"login-failure\"}");
             }
