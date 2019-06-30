@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*" %>
 
 <%
@@ -12,7 +12,7 @@ if (currentUserName != null) {
     System.out.println("AD JSP >> No user identified, session invalid");
 }
 
-%> -->
+%>
 
 <html lang="en">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -217,7 +217,6 @@ if (currentUserName != null) {
                     <div class="form-group mt-5 w-50">
                         <p class="h3 capzies">Contact Number</p>
                         <div class="custom-file">
-                            <label for="fad_title">Ad Title</label>
                             <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
@@ -226,8 +225,8 @@ if (currentUserName != null) {
                             </div>
                         </div>
                     </div>
-                    <div class="form-group mt-5 w-50">
-                        <button class="btn btn-primary" id="fad_post_btn" name="fad_post_btn">Post Ad</button>
+                    <div class="form-group mt-5 mb-5 w-50">
+                        <button class="btn btn-primary" id="fad_post_btn" name="fad_post_btn" type="button">Post Ad</button>
                     </div>
                 </form>
             </div>

@@ -39,7 +39,7 @@ $(document).on('click', '#fad_post_btn', () => {
         adcat: 69,
         adtitle: $("#fad_title").val(),
         addesc: $("#fad_desc").val(),
-        adpric: $("#fad_price").val(),
+        adprice: $("#fad_price").val(),
         adlocid: $("#fad_city").val(),
     }
     let ca_pl = {
