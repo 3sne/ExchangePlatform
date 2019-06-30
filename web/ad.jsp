@@ -69,6 +69,10 @@ if (currentUserName != null) {
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
         }
 
+        #zoom-container {
+            transition: visibility 0.5s;
+        }
+
         .my-loader {
             position: absolute;
             left: 50%;
