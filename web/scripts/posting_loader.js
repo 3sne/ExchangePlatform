@@ -44,6 +44,7 @@ $(document).ready(() => {
     }
     $.ajax(ad_fetch_url, ad_fetch_payload).done(()=>{
         console.log("[AJAX] DONE AD FETCH");
+        $("#site_footer").load("site_footer.html");
     });
 
     $("#more_ad_loader").click(() => {

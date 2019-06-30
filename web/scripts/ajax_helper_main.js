@@ -73,13 +73,13 @@ $(document).ready(function () {
                 let sResp = data;
                 if (sResp.code === 100) {
                     console.log("[TRYSELL] USER EXIST");
-                    //dothis: load enter password html
+                    //done: load enter password html
                     $("#tempholder_pass_login").val(providedEmail);
                     epglobals.s_login_e = providedEmail;
                     $("#trySellContentHolder").load("trysell-login.html");
                 } else if (sResp.code === 101) {
                     console.log("[TRYSELL] USER DON'T EXIST");
-                    //dothis: load set password and username html
+                    //done: load set password and username html
                     $("#tempholder_pass_signup").val(providedEmail);
                     epglobals.s_signup_e = providedEmail;
                     $("#trySellContentHolder").load("trysell-signup.html");

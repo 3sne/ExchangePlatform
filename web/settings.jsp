@@ -10,8 +10,10 @@ if (currentUserName != null) {
 } else {
     currentUserName = "";
     System.out.println("AD JSP >> No user identified, session invalid");
+    String site = new String("http://localhost:8084/ExchangePlatform/");
+    response.setStatus(response.SC_MOVED_TEMPORARILY);
+    response.setHeader("Location", site);
 }
-
 %>
 
 <html lang="en">
