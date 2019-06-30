@@ -51,7 +51,6 @@
     });
     
     $("#trySellSignUpNext1").click(function() {
-        epglobals.toggleSpinner("#trySellContentHolder", "#tsch-spinner", "d-none");
         $("#sutstat").text("");
         
         let e = epglobals.s_signup_e;
@@ -69,12 +68,14 @@
                     'uname': u
                 },
                 success: (data) => {
-                    let sResp = $.parseJSON(data);
+                    let sResp = data;
                     if (sResp.code === 100) {
                         console.log("[TRYSELL::SIGNUP] SignUp Successful >> ", sResp.username);
-                        $('#logInModal').modal('hide');
                         epglobals._USERNAME = sResp.username;
-                        //dothis: location = (GO TO POST AD AFTER SETTING SESSION PARAMS)
+                        $("#trySellContentHolder").load("signup_success.html");
+                        setTimeout(() => {
+                            //dothis: location = (GO TO POST AD AFTER SETTING SESSION PARAMS)
+                        }, 2000);
                     } else if (sResp.code === 201) { // 201
                         console.log("[TRYSELL::SIGNUP] SignUp Unsuccessful :(");
                         $("#getLoginPass").val("");
@@ -83,7 +84,7 @@
                         console.log("[TRYSELL::SIGNUP] SignUp Unsuccessful :(");
                         $("#getLoginPass").val("");
                         $("#sutstat").text("Username already exists, please try again.");
-                    } else { // 999
+                    } else { // 999, 998
                         console.log("[TRYSELL::SIGNUP] SignUp Unsuccessful :(");
                         $("#getLoginPass").val("");
                         $("#sutstat").text("Server Error, please try again later.");
@@ -94,10 +95,7 @@
                 }
             };
             $.ajax(reqUrl, reqLoad).done(() => {
-                epglobals.toggleSpinner("#trySellContentHolder", "#tsch-spinner", "d-none");
-            });
-        } else {
-            epglobals.toggleSpinner("#trySellContentHolder", "#tsch-spinner", "d-none");
+           });
         }
     });
 </script>

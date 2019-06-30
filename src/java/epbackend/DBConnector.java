@@ -21,7 +21,7 @@ public class DBConnector {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(db_url, db_worker_name, db_worker_password);
-            System.out.println("Connection Successful");
+            System.out.println("[DB Connector] Connection Successful");
         } catch (ClassNotFoundException ex) {
             System.out.println("Oopsie1");
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
