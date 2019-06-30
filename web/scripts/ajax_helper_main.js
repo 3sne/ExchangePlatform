@@ -1,9 +1,21 @@
 let epglobals = {
+    // vars
     _USERNAME: '',
     s_login_e: '',
     s_login_p: '',
     s_signup_e: '',
-    s_singup_p: ''
+    s_singup_p: '',
+
+    //methods
+    toggleSpinner: function(elemId, spinner, classPlay) {
+        if ($(spinner).hasClass(classPlay)) {
+            $(elemId).addClass(classPlay);
+            $(spinner).removeClass(classPlay);
+        } else {
+            $(elemId).removeClass(classPlay);
+            $(spinner).addClass(classPlay);
+        }
+    }
 };
 
 $(document).ready(function () {
@@ -50,8 +62,7 @@ $(document).ready(function () {
             return;
         }
         const providedEmail = $("#tryEmail").val();
-        $("#trySellContentHolder").addClass("d-none");
-        $("#tsch-spinner").removeClass("d-none");
+        epglobals.toggleSpinner("#trySellContentHolder", "#tsch-spinner", "d-none");
         let reqUrl = 'http://localhost:8084/ExchangePlatform/TrySell';
         let reqLoad = {
             data: {
@@ -66,7 +77,6 @@ $(document).ready(function () {
                     $("#tempholder_pass_login").val(providedEmail);
                     epglobals.s_login_e = providedEmail;
                     $("#trySellContentHolder").load("password.html");
-
                 } else if (sResp.code === 101) {
                     console.log("[TRYSELL] USER DON'T EXIST");
                     //dothis: load set password and username html
@@ -74,8 +84,7 @@ $(document).ready(function () {
                 } else {
                     console.log("[TRYSELL] CHECK ERROR FOR CODE ", sResp.code, " in TrySell Servlet");
                 }
-                $("#trySellContentHolder").removeClass("d-none");
-                $("#tsch-spinner").addClass("d-none");
+                epglobals.toggleSpinner("#trySellContentHolder", "#tsch-spinner", "d-none");
             },
             failure: (data) => {
                 console.log("[ERROR] Path: /TrySell | ajax failure", data);

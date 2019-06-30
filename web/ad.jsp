@@ -6,10 +6,10 @@
 String currentUserName = (String) session.getAttribute("currentUserName");
 
 if (currentUserName != null) {
-    System.out.println("JSP ++ " + currentUserName);
+    System.out.println("AD JSP >> " + currentUserName);
 } else {
     currentUserName = "";
-    System.out.println("No user identified, session invalid");
+    System.out.println("AD JSP >> No user identified, session invalid");
 }
 
 %>
@@ -100,7 +100,7 @@ if (currentUserName != null) {
         }
 
         #trySellModelContent{
-            min-height:150px;
+            min-height: 200px;
         }
 </style>
 </head>
