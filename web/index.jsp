@@ -91,7 +91,7 @@ if (currentUserName != null) {
                 data-target="#logInModal">Login</button>
             <div id="loadUserButton" class="btn-group mr-2" style="visibility: hidden;">
             </div>
-            <button class="btn btn-primary mr-lg-5" type="button" data-toggle="modal" data-target="#trySellingModal">
+            <button id="navbar-sell-button" class="btn btn-primary mr-lg-5" type="button" data-toggle="modal" data-target="#trySellingModal">
                 <i class="fas fa-dollar-sign"></i>
                 <span class="ml-1 pr-1">Sell</span>
             </button>

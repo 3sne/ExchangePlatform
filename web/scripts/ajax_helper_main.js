@@ -39,6 +39,15 @@ $(document).ready(function () {
         }
     });
 
+    $("#navbar-sell-button").click(() => {
+        if ($("#session_uname_capture").val() != '') {
+            console.log('NB-SELL-BTN: Already logged in');
+            
+        } else {
+            console.log('NB-SELL-BTN: Not Logged in');
+        }
+    });
+
     $('#session_uname_capture').bind('input', function () {
         console.log($("#session_uname_capture").val() + " << TRIGGER");
     });
@@ -70,6 +79,8 @@ function loginSuccessUiChange(data) {
                 let sResp = $.parseJSON(data);
                 console.log(sResp);
                 if (sResp.code === 100) {
+                    USERNAME = '';
+                    $("#session_uname_capture").val('');
                     console.log("[AJAX] Logout Successful");
                     location = location;
                 } else {

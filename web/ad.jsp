@@ -92,7 +92,7 @@ if (currentUserName != null) {
                 data-target="#logInModal">Login</button>
             <div id="loadUserButton" class="btn-group mr-2" style="visibility: hidden;">
             </div>
-            <button class="btn btn-primary mr-lg-5" type="button" data-toggle="modal" data-target="#trySellingModal">
+            <button id="navbar-sell-button" class="btn btn-primary mr-lg-5" type="button" data-toggle="modal" data-target="#trySellingModal">
                 <i class="fas fa-dollar-sign"></i>
                 <span class="ml-1 pr-1">Sell</span>
             </button>
@@ -187,17 +187,17 @@ if (currentUserName != null) {
                             <div class="text-center text-muted mb-4">
                                 <small>Continue with e-mail</small>
                             </div>
-                            <form role="form">
+                            <form role="form" method="POST" action='${pageContext.request.contextPath}/TrySell'>
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-paper-plane"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Email" type="email">
+                                        <input class="form-control" name="tryEmail" placeholder="Email" type="email">
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary mt-4">Next</button>
+                                    <button type="submit" class="btn btn-primary mt-4">Next</button>
                                 </div>
                             </form>
                         </div>

@@ -32,7 +32,7 @@ $(document).ready(() => {
                 $("#ad_price_holder").html("&#8377; " + ad_price);
                 $("#ad_uname_holder").html(ad_poster_uname);
             } else { //failure
-
+                $("#zoom-container").load('AdNotFound.html');
             }
         }
     }
