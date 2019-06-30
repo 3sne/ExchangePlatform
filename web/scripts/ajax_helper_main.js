@@ -1,4 +1,10 @@
-let USERNAME;
+let epglobals = {
+    _USERNAME: '',
+    s_login_e: '',
+    s_login_p: '',
+    s_signup_e: '',
+    s_singup_p: ''
+};
 
 $(document).ready(function () {
     console.log("From ajax_helper_main");
@@ -20,7 +26,7 @@ $(document).ready(function () {
                         console.log("[AJAX] Login Successful");
                         console.log("OUR USER IS: ", sResp.username);
                         $('#logInModal').modal('hide');
-                        USERNAME = sResp.username;
+                        epglobals._USERNAME = sResp.username;
                         location = location;
                     } else if (sResp.code === 101) {
                         console.log("[AJAX] Login Unsuccessful");
@@ -39,6 +45,47 @@ $(document).ready(function () {
         }
     });
 
+    $("#trySellNext1").click(() => {
+        if ($("#tryEmail").val() == '') {
+            return;
+        }
+        const providedEmail = $("#tryEmail").val();
+        $("#trySellContentHolder").addClass("d-none");
+        $("#tsch-spinner").removeClass("d-none");
+        let reqUrl = 'http://localhost:8084/ExchangePlatform/TrySell';
+        let reqLoad = {
+            data: {
+                'tryEmail': providedEmail
+            },
+            success: (data) => {
+                // console.log(data);
+                let sResp = data;
+                if (sResp.code === 100) {
+                    console.log("[TRYSELL] USER EXIST");
+                    //dothis: load enter password html
+                    $("#tempholder_pass_login").val(providedEmail);
+                    epglobals.s_login_e = providedEmail;
+                    $("#trySellContentHolder").load("password.html");
+
+                } else if (sResp.code === 101) {
+                    console.log("[TRYSELL] USER DON'T EXIST");
+                    //dothis: load set password and username html
+
+                } else {
+                    console.log("[TRYSELL] CHECK ERROR FOR CODE ", sResp.code, " in TrySell Servlet");
+                }
+                $("#trySellContentHolder").removeClass("d-none");
+                $("#tsch-spinner").addClass("d-none");
+            },
+            failure: (data) => {
+                console.log("[ERROR] Path: /TrySell | ajax failure", data);
+            }
+        };
+        $.ajax(reqUrl, reqLoad).done(() => {
+            console.log("[TRYSELL] Ajax attempt complete");
+        });
+    }); // Next on click end
+
     // ** Try Sell Handler
     $("#navbar-sell-button").click(() => {
         if ($("#session_uname_capture").val() != '') {
@@ -56,16 +103,16 @@ $(document).ready(function () {
     });
 
     if ($("#session_uname_capture").val() != "") {
-        USERNAME = $("#session_uname_capture").val();
-        console.log("username (hidden input) = ", USERNAME);
-        loginSuccessUiChange(USERNAME);
+        epglobals._USERNAME = $("#session_uname_capture").val();
+        console.log("username (hidden input) = ", epglobals._USERNAME);
+        loginSuccessUiChange(epglobals._USERNAME);
     }
 
 });
 
 // ** Change navbar to reflect logged in state
 function loginSuccessUiChange(data) {
-    USERNAME = $("#session_uname_capture").val();
+    epglobals._USERNAME = $("#session_uname_capture").val();
     $("#navbar-login-btn").remove();
     $("#loadUserButton").loadTemplate($("#template"), {
         username: data
@@ -82,7 +129,7 @@ function loginSuccessUiChange(data) {
                 let sResp = $.parseJSON(data);
                 console.log(sResp);
                 if (sResp.code === 100) {
-                    USERNAME = '';
+                    epglobals._USERNAME = '';
                     $("#session_uname_capture").val('');
                     console.log("[AJAX] Logout Successful");
                     location = location;

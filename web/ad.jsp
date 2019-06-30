@@ -22,8 +22,7 @@ if (currentUserName != null) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
     <title>Exchange Platform</title>
     <style>
@@ -88,18 +87,22 @@ if (currentUserName != null) {
             height: 120px;
             -webkit-animation: spin 2s linear infinite;
             animation: spin 2s linear infinite;
-            }
+        }
 
-            @-webkit-keyframes spin {
+        @-webkit-keyframes spin {
             0% { -webkit-transform: rotate(0deg); }
             100% { -webkit-transform: rotate(360deg); }
-            }
+        }
 
-            @keyframes spin {
+        @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-            }
-    </style>
+        }
+
+        #trySellModelContent{
+            min-height:150px;
+        }
+</style>
 </head>
 
 <body>
@@ -208,31 +211,38 @@ if (currentUserName != null) {
     <div class="modal fade" id="trySellingModal" tabindex="-1" role="dialog" aria-labelledby="trySellingModal"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content shadow">
+            <div class="modal-content shadow" id="trySellModelContent">
                 <div class="modal-body">
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <div class="text-center">
-                                <h2 id="logo_placeholder" class="ml-lg-2 ml-1">ExchangePlatform</h2>
+                                <h2 id="logo_placeholder" class="ml-lg-2 ml-1 mb-3">ExchangePlatform</h2>
+                            </div>
+                            <div id="tsch-spinner" class="text-center my-auto d-none">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading Next Element...</span>
+                                </div>
                             </div>
                             <div id="trySellContentHolder">
                                 <div class="text-center text-muted mb-4">
                                     <small>Continue with e-mail</small>
                                 </div>
-                                <form role="form" method="POST" action='${pageContext.request.contextPath}/TrySell'>
+                                <form role="form">
                                     <div class="form-group">
                                         <div class="input-group input-group-alternative mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-paper-plane"></i></span>
                                             </div>
-                                            <input class="form-control" name="tryEmail" placeholder="Email" type="email">
+                                            <input class="form-control" id="tryEmail" name="tryEmail" placeholder="Email" type="email" required>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary mt-4">Next</button>
+                                        <button id="trySellNext1" name="trySellNext1" type="button" class="btn btn-primary mt-4">Next</button>
                                     </div>
                                 </form>
                             </div>
+                            <input id="tempholder_pass_login" type="hidden" value="">
+                            <input id="tempholder_pass_signup" type="hidden" value="">
                         </div>
                     </div>
                 </div>
@@ -439,12 +449,14 @@ if (currentUserName != null) {
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script> -->
     <script src="assets/external-scripts/jquery-3.4.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> --%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="assets/external-scripts/jquery.loadTemplate.js"></script>
     <script src="scripts/ajax_helper_main.js"></script>
     <script src="scripts/posting_zoom_helper.js"></script>

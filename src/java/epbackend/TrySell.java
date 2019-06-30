@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -37,6 +36,7 @@ public class TrySell extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -49,9 +49,15 @@ public class TrySell extends HttpServlet {
             String tryEmail = request.getParameter("tryEmail");
             System.out.println(tryEmail);
             
+            if (tryEmail.isEmpty()){
+                out.println("{\"code\": 102, \"data\": \"No e-mail value received\"}");
+                out.close();
+                return;
+            }
+            
             Connection con = DBConnector.getCon();
             if (con == null) {
-                out.println("<script type='text/javascript'>alert('Chimcken nugger');</script>");
+                out.println("{\"code\": 999, \"data\": \"Failed to connect to DB\"}");
                 out.close();
                 return;
             }
@@ -63,19 +69,19 @@ public class TrySell extends HttpServlet {
 
             gotEmail = prepSearchThisEmail.executeQuery();
 
-            if (gotEmail.next()) { // success
+            if (gotEmail.next()) { // user exists but not logged in.
                 String rUser = gotEmail.getString("uname");
                 String rEmail = gotEmail.getString("email");
                 String rUid = gotEmail.getString("uid");
                 System.out.println("TRY SELL >> " + rEmail);
-                out.println("{\n" +
-                            "        \"code\": 100,\n" +
-                            "        \"data\": \"success\",\n" +
-                            "        \"username\": " + rUser + ",\n" +
-                            "        \"email\": " + rEmail + ",\n" +
-                            "        \"uid\": " + rUid + "\n" +
-                            "    }");
-            } else {
+                out.println("{" +
+                            "\"code\": 100," +
+                            "\"data\": \"success\"," +
+                            "\"username\": \"" + rUser + "\"," +
+                            "\"email\": \"" + rEmail + "\"," +
+                            "\"uid\": \"" + rUid + "\"" +
+                            "}");
+            } else { // new user, take him through signup routine
                 out.println("{\"code\": 101, \"data\": \"new-user\"}");
             }
         } finally {
