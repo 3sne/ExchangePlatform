@@ -6,7 +6,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><i class="far fa-paper-plane"></i></span>
             </div>
-            <input class="form-control" id="getSignUpUname" name="getSignUpUname" placeholder="username" type="text" pattern="[A-Za-z][A-Za-z0-9_]{4-20}" required>
+            <input class="form-control" id="getSignUpUname" name="getSignUpUname" placeholder="username" type="text" pattern="^[a-z0-9_-]{4-20}$" required>
         </div>
     </div>
     <div class="form-group">
@@ -33,7 +33,7 @@
         <p id="sutstat" style="color: red"></p>
     </div>
     <div class="text-center">
-        <button id="trySellSignUpNext1" name="trySellSignUpNext1" type="button" class="btn btn-primary">Next</button>
+        <button id="trySellSignUpNext1" name="trySellSignUpNext1" type="button" class="btn btn-success">Sign Up</button>
     </div>
 </form>
 

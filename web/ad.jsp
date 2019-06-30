@@ -251,7 +251,7 @@ if (currentUserName != null) {
     </div>
 
     <%-- AD ZOOMED IN --%>
-    <div id="loader" class="my-loader"></div>
+    <div id="loader" class="my-loader d-none"></div>
     <div id="zoom-container" class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-7">
@@ -321,128 +321,7 @@ if (currentUserName != null) {
     </div>
 
     <!-- FOOTER -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="page-footer font-small unique-color-dark col mt-4" style="padding: 0px;">
-                <div style="background: #c31432;
-                        background: -webkit-linear-gradient(to right, #240b36, #c31432);
-                        background: linear-gradient(to right, #240b36, #c31432); width: 100%;">
-                    <div class="container">
-                        <!-- Grid row-->
-                        <div class="row py-4 d-flex align-items-center">
-                            <!-- Grid column -->
-                            <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                                <h6 class="mb-0" style="color: rgb(255,255,255);">Get connected with us on social
-                                    networks!</h6>
-                            </div>
-                            <!-- Grid column -->
-                            <!-- Grid column -->
-                            <div class="col-md-6 col-lg-7 text-center text-md-right">
-                                <!-- Facebook -->
-                                <a class="fb-ic">
-                                    <i class="fab fa-facebook-f white-text mr-4" style="color: rgb(255,255,255);"> </i>
-                                </a>
-                                <!-- Twitter -->
-                                <a class="tw-ic">
-                                    <i class="fab fa-twitter white-text mr-4" style="color: rgb(255,255,255);"> </i>
-                                </a>
-                                <!--Linkedin -->
-                                <a class="li-ic">
-                                    <i class="fab fa-linkedin-in white-text mr-4 " style="color: rgb(255,255,255);">
-                                    </i>
-                                </a>
-                                <!--Instagram-->
-                                <a class="ins-ic">
-                                    <i class="fab fa-instagram white-text" style="color: rgb(255,255,255);"> </i>
-                                </a>
-                            </div>
-                            <!-- Grid column -->
-                        </div>
-                        <!-- Grid row-->
-                    </div>
-                </div>
-                <!-- Footer Links -->
-                <div class="container text-center text-md-left mt-5">
-                    <!-- Grid row -->
-                    <div class="row mt-3">
-                        <!-- Grid column -->
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <!-- Content -->
-                            <h6 class="text-uppercase font-weight-bold">EXCHANGE PLATFORM</h6>
-                            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                            <p>A place where student can exchange notes and materials etc. This is bogus text so its
-                                just random stuff to fill the column. Lorem Ipsum?</p>
-                        </div>
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <!-- Links -->
-                            <h6 class="text-uppercase font-weight-bold">Platforms</h6>
-                            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                            <p>
-                                <a href="#!">Web</a>
-                            </p>
-                            <p>
-                                <a href="#!">Android</a>
-                            </p>
-                            <p>
-                                <a href="#!">iOS</a>
-                            </p>
-                            <p>
-                                <a href="#!">Bootstrap Angular</a>
-                            </p>
-
-                        </div>
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <!-- Links -->
-                            <h6 class="text-uppercase font-weight-bold">About Us</h6>
-                            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                            <p>
-                                <a href="#!">About Developers</a>
-                            </p>
-                            <p>
-                                <a href="#!">Our Story</a>
-                            </p>
-                            <p>
-                                <a href="#!">Donate!</a>
-                            </p>
-                            <p>
-                                <a href="#!">Help</a>
-                            </p>
-
-                        </div>
-                        <!-- Grid column -->
-                        <!-- Grid column -->
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                            <!-- Links -->
-                            <h6 class="text-uppercase font-weight-bold">Contact</h6>
-                            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                            <p>
-                                <i class="fas fa-home mr-3"></i> Manipal, KA, India</p>
-                            <p>
-                                <i class="fas fa-envelope mr-3"></i> info@explat.com</p>
-                            <p>
-                                <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                            <p>
-                                <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-                        </div>
-                        <!-- Grid column -->
-                    </div>
-                    <!-- Grid row -->
-                </div>
-                <div class="footer-copyright text-center text-muted py-3">
-                    All icons provided by <a href="https://fontawesome.com/license" target="_blank">fontawesome.com</a>, under Creative
-                    Commons Attribution
-                    4.0
-                </div>
-                <!-- Copyright -->
-            </div>
-            <!-- Footer -->
-        </div>
-    </div>
-
+    <div id="site_footer" role="footer" class="container-fluid"></div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- UNCOMMENT BEFORE LAUNCH <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

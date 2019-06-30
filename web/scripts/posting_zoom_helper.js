@@ -7,8 +7,7 @@ let getUrlVars = () =>  {
 }
 
 $(document).ready(() => {
-    $("#loader").css("visibility", "visible");
-    $("#zoom-container").addClass('hidden');
+    epglobals.toggleSpinner("#zoom-container", "#loader", "d-none");
     let hrefparams = getUrlVars();
     const posting_zoom_url = 'http://localhost:8084/ExchangePlatform/ad';
     console.log(posting_zoom_url);
@@ -33,14 +32,14 @@ $(document).ready(() => {
                 $("#ad_title_holder").html(ad_title);
                 $("#ad_price_holder").html("&#8377; " + ad_price);
                 $("#ad_uname_holder").html(ad_poster_uname);
+                epglobals.toggleSpinner("#zoom-container", "#loader", "d-none");
+                $("#site_footer").load("site_footer.html");
             } else { //failure
                 $("#zoom-container").load('AdNotFound.html');
             }
         }
     }
     $.ajax(posting_zoom_url, posting_fetch_payload).done(()=>{
-        $("#loader").css("visibility", "hidden");
-        $("#zoom-container").removeClass('hidden');
         console.log("[AJAX] DONE POSTING ZOOM FETCH");
     });
 });
