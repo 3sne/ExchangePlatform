@@ -215,22 +215,24 @@ if (currentUserName != null) {
                             <div class="text-center">
                                 <h2 id="logo_placeholder" class="ml-lg-2 ml-1">ExchangePlatform</h2>
                             </div>
-                            <div class="text-center text-muted mb-4">
-                                <small>Continue with e-mail</small>
-                            </div>
-                            <form role="form" method="POST" action='${pageContext.request.contextPath}/TrySell'>
-                                <div class="form-group">
-                                    <div class="input-group input-group-alternative mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-paper-plane"></i></span>
+                            <div id="trySellContentHolder">
+                                <div class="text-center text-muted mb-4">
+                                    <small>Continue with e-mail</small>
+                                </div>
+                                <form role="form" method="POST" action='${pageContext.request.contextPath}/TrySell'>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-alternative mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-paper-plane"></i></span>
+                                            </div>
+                                            <input class="form-control" name="tryEmail" placeholder="Email" type="email">
                                         </div>
-                                        <input class="form-control" name="tryEmail" placeholder="Email" type="email">
                                     </div>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary mt-4">Next</button>
-                                </div>
-                            </form>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary mt-4">Next</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

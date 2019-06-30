@@ -39,12 +39,15 @@ $(document).ready(function () {
         }
     });
 
+    // ** Try Sell Handler
     $("#navbar-sell-button").click(() => {
         if ($("#session_uname_capture").val() != '') {
             console.log('NB-SELL-BTN: Already logged in');
-            
+            //dothis: go to sell page (create ad)
         } else {
             console.log('NB-SELL-BTN: Not Logged in');
+            //dothis: if valid user: ask for password then send to sell page (create ad)
+            //                  not: sign up content in html!!
         }
     });
 
