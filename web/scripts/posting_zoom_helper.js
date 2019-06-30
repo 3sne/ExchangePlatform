@@ -7,6 +7,8 @@ let getUrlVars = () =>  {
 }
 
 $(document).ready(() => {
+    $("#loader").css("display", "block");
+    $("#zoom-container").css("display", "none");
     let hrefparams = getUrlVars();
     const posting_zoom_url = 'http://localhost:8084/ExchangePlatform/ad';
     console.log(posting_zoom_url);
@@ -37,6 +39,8 @@ $(document).ready(() => {
         }
     }
     $.ajax(posting_zoom_url, posting_fetch_payload).done(()=>{
+        $("#loader").css("display", "none");
+        $("#zoom-container").css("display", "block");
         console.log("[AJAX] DONE POSTING ZOOM FETCH");
     });
 });
