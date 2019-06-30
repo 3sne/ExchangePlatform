@@ -305,7 +305,7 @@ if (currentUserName != null) {
                         <p class="text-left h5 text-muted" >
                             <a id="ad_uname_holder" href=""></a>                    <%-- !! --%>
                         </p>
-                        <button class="btn btn-outline-success btn-block mt-3">Chat with Seller</button>
+                        <button class="btn btn-outline-success btn-block mt-3">Contact Them</button>
                     </div>
                 </div>
                 <div class="card mp-mat-sha-1 mt-4">
