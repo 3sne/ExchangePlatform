@@ -76,11 +76,13 @@ $(document).ready(function () {
                     //dothis: load enter password html
                     $("#tempholder_pass_login").val(providedEmail);
                     epglobals.s_login_e = providedEmail;
-                    $("#trySellContentHolder").load("password.html");
+                    $("#trySellContentHolder").load("trysell-login.html");
                 } else if (sResp.code === 101) {
                     console.log("[TRYSELL] USER DON'T EXIST");
                     //dothis: load set password and username html
-
+                    $("#tempholder_pass_signup").val(providedEmail);
+                    epglobals.s_signup_e = providedEmail;
+                    $("#trySellContentHolder").load("trysell-signup.html");
                 } else {
                     console.log("[TRYSELL] CHECK ERROR FOR CODE ", sResp.code, " in TrySell Servlet");
                 }

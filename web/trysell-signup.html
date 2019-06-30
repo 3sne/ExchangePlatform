@@ -1,0 +1,103 @@
+
+<form role="form">
+    <div class="form-group"> 
+        <label>What should we call you?</label>
+        <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="far fa-paper-plane"></i></span>
+            </div>
+            <input class="form-control" id="getSignUpUname" name="getSignUpUname" placeholder="username" type="text" pattern="[A-Za-z][A-Za-z0-9_]{4-20}" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Choose a robust password</label>
+        <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            </div>
+            <input placeholder="Password" type="password" id="getSignUpPwd" class="form-control" aria-describedby="passwordHelpInline">
+        </div>
+        <small id="passwordHelpInline" class="text-muted">
+            Must be atleast 8 characters long.
+        </small>
+    </div>
+    <div class="form-group">
+        <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            </div>
+            <input placeholder="Confirm Password" type="password" id="confSignUpPwd" class="form-control" aria-describedby="passwordHelpInline">
+        </div>
+    </div>
+    <div class="text-center text-muted mt-2">
+        <p id="sutstat" style="color: red"></p>
+    </div>
+    <div class="text-center">
+        <button id="trySellSignUpNext1" name="trySellSignUpNext1" type="button" class="btn btn-primary">Next</button>
+    </div>
+</form>
+
+<script>
+    $('#confSignUpPwd').keyup(function() {
+        if ($('#confSignUpPwd').val() !== $("#getSignUpPwd").val() || $("#getSignUpPwd").val().length < 8) {
+            $('#getSignUpPwd').addClass("is-invalid");
+            $('#confSignUpPwd').addClass("is-invalid");
+        } else {
+            $('#getSignUpPwd').addClass("is-valid");
+            $('#confSignUpPwd').addClass("is-valid");
+            $('#getSignUpPwd').removeClass("is-invalid");
+            $('#confSignUpPwd').removeClass("is-invalid");
+        }
+    });
+    
+    $("#trySellSignUpNext1").click(function() {
+        epglobals.toggleSpinner("#trySellContentHolder", "#tsch-spinner", "d-none");
+        $("#sutstat").text("");
+        
+        let e = epglobals.s_signup_e;
+        let p = $("#getSignUpPwd").val();
+        let u = $("#getSignUpUname").val();
+
+        //dothis: input validation
+
+        if (e !== '' && p !== '' && u !== '') {
+            let reqUrl = 'http://localhost:8084/ExchangePlatform/signup';
+            let reqLoad = {
+                data: {
+                    'email': e,
+                    'password': p,
+                    'uname': u
+                },
+                success: (data) => {
+                    let sResp = $.parseJSON(data);
+                    if (sResp.code === 100) {
+                        console.log("[TRYSELL::SIGNUP] SignUp Successful >> ", sResp.username);
+                        $('#logInModal').modal('hide');
+                        epglobals._USERNAME = sResp.username;
+                        //dothis: location = (GO TO POST AD AFTER SETTING SESSION PARAMS)
+                    } else if (sResp.code === 201) { // 201
+                        console.log("[TRYSELL::SIGNUP] SignUp Unsuccessful :(");
+                        $("#getLoginPass").val("");
+                        $("#sutstat").text("Invalid details, please try again.");
+                    } else if (sResp.code === 202) { //202
+                        console.log("[TRYSELL::SIGNUP] SignUp Unsuccessful :(");
+                        $("#getLoginPass").val("");
+                        $("#sutstat").text("Username already exists, please try again.");
+                    } else { // 999
+                        console.log("[TRYSELL::SIGNUP] SignUp Unsuccessful :(");
+                        $("#getLoginPass").val("");
+                        $("#sutstat").text("Server Error, please try again later.");
+                    }
+                },
+                failure: (data) => {
+                    console.log("[ERROR] Path: /signup | ajax failure", data);
+                }
+            };
+            $.ajax(reqUrl, reqLoad).done(() => {
+                epglobals.toggleSpinner("#trySellContentHolder", "#tsch-spinner", "d-none");
+            });
+        } else {
+            epglobals.toggleSpinner("#trySellContentHolder", "#tsch-spinner", "d-none");
+        }
+    });
+</script>
