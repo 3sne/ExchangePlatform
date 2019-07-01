@@ -15,10 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +37,10 @@ public class AdFetch extends HttpServlet {
         String ad_title;
         String ad_desc;
         String ad_price;
-        String ad_location;
+        String ad_date;
+        String ad_location_id;
+        String ad_location_city;
+        String ad_location_state;
     }
     
     public static class AdJsonHelper {
@@ -96,23 +95,25 @@ public class AdFetch extends HttpServlet {
             // preparing the Ad Fetch Query
             if (this.adExcept.isEmpty()) {
                 adResult = adFetchQuery
-                    .executeQuery("select * from ads limit " + this.maxAdCount);
+                    .executeQuery("select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id ORDER BY a.timestamp DESC limit " + this.maxAdCount);
             }else{
                 adResult = adFetchQuery
-                    .executeQuery("select * from ads where adid NOT IN(" + this.adExcept + ") limit " + this.maxAdCount);
+                    .executeQuery("select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id where a.adid NOT IN(" + this.adExcept + ") ORDER BY a.timestamp DESC limit " + this.maxAdCount);
             }
             
             AdJsonHelper ajh = new AdJsonHelper();
             ajh.ad_list = new ArrayList<Ad>(); 
             while (adResult.next()) {
                 Ad exAd = new Ad();
-                exAd.ad_id = adResult.getString("adid");
-                exAd.ad_poster_id = adResult.getString("uid");
-                exAd.ad_category_id = adResult.getString("cid");
-                exAd.ad_title = adResult.getString("title");
-                exAd.ad_desc = adResult.getString("description");
-                exAd.ad_price = adResult.getString("price");
-                exAd.ad_location = adResult.getString("city_id");
+                exAd.ad_id = adResult.getString("a.adid");
+                exAd.ad_poster_id = adResult.getString("a.uid");
+                exAd.ad_category_id = adResult.getString("a.cid");
+                exAd.ad_title = adResult.getString("a.title");
+                exAd.ad_price = adResult.getString("a.price");
+                exAd.ad_date = adResult.getString("tarikh");
+                exAd.ad_location_id = adResult.getString("a.city_id");
+                exAd.ad_location_city = adResult.getString("c.city_name");
+                exAd.ad_location_state = adResult.getString("c.city_state");
                 ajh.ad_list.add(exAd);
                 System.out.println(exAd.ad_id);
             }
