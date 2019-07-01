@@ -84,7 +84,7 @@ public class Ad extends HttpServlet {
                 pze.ad_title = adResult.getString("title");
                 pze.ad_desc = adResult.getString("description");
                 pze.ad_price = adResult.getString("price");
-                pze.ad_location = adResult.getString("lid");
+                pze.ad_location = adResult.getString("city_id");
                 pze.true_content = true;
             } else {
                 pze.true_content = false;

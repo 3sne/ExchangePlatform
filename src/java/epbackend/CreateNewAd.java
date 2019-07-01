@@ -74,7 +74,7 @@ public class CreateNewAd extends HttpServlet {
                 return;
             }
             
-            String injAdSql = "INSERT INTO ads (uid, cid, lid, title, description, price) VALUES (?, ?, ?, ?, ?, ?)";
+            String injAdSql = "INSERT INTO ads (uid, cid, city_id, title, description, price) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement injAd = con.prepareStatement(injAdSql);
             injAd.setString(1, cuid);
             injAd.setString(2, acat);

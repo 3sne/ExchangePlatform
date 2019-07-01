@@ -112,7 +112,7 @@ public class AdFetch extends HttpServlet {
                 exAd.ad_title = adResult.getString("title");
                 exAd.ad_desc = adResult.getString("description");
                 exAd.ad_price = adResult.getString("price");
-                exAd.ad_location = adResult.getString("lid");
+                exAd.ad_location = adResult.getString("city_id");
                 ajh.ad_list.add(exAd);
                 System.out.println(exAd.ad_id);
             }
