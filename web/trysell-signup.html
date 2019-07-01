@@ -74,7 +74,8 @@
                         epglobals._USERNAME = sResp.username;
                         $("#trySellContentHolder").load("signup_success.html");
                         setTimeout(() => {
-                            //dothis: location = (GO TO POST AD AFTER SETTING SESSION PARAMS)
+                            //done: location = (GO TO POST AD AFTER SETTING SESSION PARAMS)
+                            window.location.href="createListing.jsp";
                         }, 2000);
                     } else if (sResp.code === 201) { // 201
                         console.log("[TRYSELL::SIGNUP] SignUp Unsuccessful :(");

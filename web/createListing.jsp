@@ -6,10 +6,12 @@
 String currentUserName = (String) session.getAttribute("currentUserName");
 
 if (currentUserName != null) {
-    System.out.println("AD JSP >> " + currentUserName);
+    System.out.println("CREATE LISTING AD JSP >> " + currentUserName);
 } else {
     currentUserName = "";
-    System.out.println("AD JSP >> No user identified, session invalid");
+    System.out.println("CREATE LISTING JSP >> No user identified, session invalid");
+    String redirectURL = "/ExchangePlatform/";
+    response.sendRedirect(redirectURL);
 }
 
 %>

@@ -39,7 +39,8 @@
                         console.log("[TRYSELL::LOGIN] Login Successful >> ", sResp.username);
                         $('#logInModal').modal('hide');
                         epglobals._USERNAME = sResp.username;
-                        //dothis location = (GO TO POST AD AFTER SETTING SESSION PARAMS)
+                        //done location = (GO TO POST AD AFTER SETTING SESSION PARAMS)
+                        window.location.href="createListing.jsp";
                     } else if (sResp.code === 101) {
                         console.log("[AJAX] Login Unsuccessful");
                         $("#getLoginPass").val("");
