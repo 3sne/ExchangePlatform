@@ -3,6 +3,7 @@ $(document).ready(() => {
     //Ad Loader
     let row_id_indexer = 0;
     let ad_fetched_already = [];
+    console.log("AAAAAAAAA ", ad_fetched_already);
     const ad_fetch_url = 'http://localhost:8084/ExchangePlatform/adfetch';
     let ad_fetch_data = {
         'max_ad_count': '12',

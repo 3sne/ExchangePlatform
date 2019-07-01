@@ -81,7 +81,7 @@ public class AdFetch extends HttpServlet {
                     this.adExcept += ",";
                 }
             }
-            
+            System.out.println("CURR EXCEPTIONS " + this.adExcept);
             
             Connection con = DBConnector.getCon();
             if (con == null) {
