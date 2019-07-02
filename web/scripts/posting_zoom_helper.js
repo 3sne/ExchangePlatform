@@ -1,6 +1,6 @@
-let getUrlVars = () =>  {
+let getUrlVars = () => {
     var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
         vars[key] = value;
     });
     return vars;
@@ -21,17 +21,26 @@ $(document).ready(() => {
         success: (data) => {
             if (data.code === 100) { //success
                 let conc_obj = data.mPze;
-                let ad_poster_uname = conc_obj.ad_poster_uname;
                 let ad_id = conc_obj.ad_id;
+                let ad_poster_id = conc_obj.ad_poster_id;
+                let ad_poster_uname = conc_obj.ad_poster_uname;
+                let ad_poster_email = conc_obj.ad_poster_email;
+                let ad_category_id = conc_obj.ad_category_id;
                 let ad_title = conc_obj.ad_title;
                 let ad_desc = conc_obj.ad_desc;
                 let ad_price = conc_obj.ad_price;
-                let ad_location = conc_obj.ad_location;
-                
+                let ad_date = new Date(conc_obj.ad_date).toDateString();
+                let ad_location_id = conc_obj.ad_location_id;
+                let ad_location_city = conc_obj.ad_location_city;
+                let ad_location_state = conc_obj.ad_location_state;
+
                 $("#ad_desc_holder").html(ad_desc);
                 $("#ad_title_holder").html(ad_title);
                 $("#ad_price_holder").html("&#8377; " + ad_price);
                 $("#ad_uname_holder").html(ad_poster_uname);
+                $("#ad_date_holder").html(ad_date);
+                $("#ad_location_blob").html(ad_location_city + ", " + ad_location_state);
+
                 epglobals.toggleSpinner("#zoom-container", "#loader", "d-none");
                 $("#site_footer").load("site_footer.html");
             } else { //failure
@@ -39,7 +48,7 @@ $(document).ready(() => {
             }
         }
     }
-    $.ajax(posting_zoom_url, posting_fetch_payload).done(()=>{
+    $.ajax(posting_zoom_url, posting_fetch_payload).done(() => {
         console.log("[AJAX] DONE POSTING ZOOM FETCH");
     });
 });
@@ -73,7 +82,7 @@ $(document).ready(() => {
 //                 let ad_desc = conc_obj.ad_desc;
 //                 let ad_price = conc_obj.ad_price;
 //                 let ad_location = conc_obj.ad_location;
-                
+
 //                 let ad_html_embed = `
 //                     <div class="row justify-content-center">
 //                     <div class="col-md-8 col-lg-7">
