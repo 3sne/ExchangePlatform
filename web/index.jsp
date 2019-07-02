@@ -42,14 +42,14 @@ if (currentUserName != null) {
             display: block;
             position: absolute;
             overflow: hidden;
-            width: 120vw;
-            height: 600px;
+            width: 140vw;
+            height: 800px;
             background: linear-gradient(to right,#ff8a00,#da1b60);
             /* background: #c31432;
             background: -webkit-linear-gradient(to right, #240b36, #c31432);
             background: linear-gradient(to right, #240b36, #c31432); */
-            top: 0;
-            left: -10%;
+            top: -20%;
+            left: -20%;
             -webkit-transform: rotate(-4deg);
             -moz-transform: rotate(-4deg);
             transform: rotate(-4deg);
