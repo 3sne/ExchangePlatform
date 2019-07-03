@@ -148,11 +148,30 @@
             username: data
         }).css("visibility", "visible");
 
+        //my ads handler
+        $("#dd-user-ads").click(event, () => {
+            window.open("myad.jsp");
+            // let reqUrl = 'myAds';
+            // $.ajax(reqUrl, {
+            //     data: {},
+            //     success: (data) => {
+            //         console.log(data);
+            //         if (data.code === 201) {
+            //             console.log("[NAVBAR::MYADS] USER NOT LOGGED IN");
+            //         } else {
+            //             console.log("[NAVBAR::MYADS] SOME OTHER ERROR");
+            //         }
+            //     }
+            // }).done(() => {
+            //     console.log("[NAVBAR::MYADS] AJAX COMPLETE");
+            // });
+        });
+
         //logout handler
         $("#dd-user-logout").click(event, () => {
             console.log(event);
             console.log("here");
-            let reqUrl = 'http://localhost:8084/ExchangePlatform/logout';
+            let reqUrl = 'logout';
             let reqLoad = {
                 data: {},
                 success: (data) => {
