@@ -59,7 +59,7 @@ if (currentUserName != null) {
             transform: rotate(-4deg);
         }
 
-        #logo_placeholder {
+        .logo_placeholder {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         }
 
@@ -117,6 +117,7 @@ if (currentUserName != null) {
             text-transform: capitalize;
         }
     </style>
+    <script src="//cdn.ckeditor.com/4.12.1/basic/ckeditor.js"></script>
 </head>
 
 <body>
@@ -133,10 +134,14 @@ if (currentUserName != null) {
         </div>
     </div>
 
-    <div class="container-fluid" style="background: linear-gradient(to right,#ff8a00,#da1b60);">
+    <div class="container-fluid" style="background: url(assets/images/404-bg-1.jpg) no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;">
         <div class="row">
-            <div class="col-4">
-                <p class="display-4 ml-2 pl-4 mt-2 pt-4">Create an Ad.</p>
+            <div class="col-lg-4 col-md-4 col-sm-7 offset-lg-8 offset-md-8 offset-sm-5">
+                <p class="display-4 ml-2 pl-4 mt-2 pt-4" style="color: white">Create an Ad.</p>
             </div>
         </div>
     </div>
@@ -156,6 +161,19 @@ if (currentUserName != null) {
                             <label for="fad_desc">Description</label>
                             <textarea class="form-control" id="fad_desc" rows="4"
                                 placeholder="Give a detailed description of the item. It is best to include things like condition, contents and damages"></textarea>
+                            <script>
+                                var fad_desc = CKEDITOR.replace( 'fad_desc', {
+                                    language: 'en',
+                                    // uiColor: '#0066CC',
+                                    disallowedContent: 'a',
+                                    fontFamily: {
+                                        options: [
+                                            'consolas'
+                                        ]
+                                    },
+                                    placeholder: "Give a detailed description of the item. It is best to include things like condition, contents and damages"
+                                });
+                            </script>
                         </div>
                     </div>
                     <div class="form-group mt-5 w-50">

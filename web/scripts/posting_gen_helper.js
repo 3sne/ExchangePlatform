@@ -46,6 +46,7 @@ $(document).on('click', '#fad_post_btn', () => {
 
     //dothis: input validation
 
+    
     // val title
     let ad_title = $("#fad_title").val();
     if (ad_title.length > 80) {
@@ -59,11 +60,13 @@ $(document).on('click', '#fad_post_btn', () => {
         return;
     }
 
+    let ad_desc = CKEDITOR.instances.fad_desc.getData();
+
     const ca_url = "http://localhost:8084/ExchangePlatform/createNewAd";
     let ca_data = {
         adcat: 2,
         adtitle: ad_title,
-        addesc: $("#fad_desc").val(),
+        addesc: ad_desc,
         adprice: $("#fad_price").val(),
         adlocid: $("#fad_city").val(),
         adphone: ad_phone
@@ -84,6 +87,13 @@ $(document).on('click', '#fad_post_btn', () => {
                 }, 2500);
             } else if (data.code === 201) { // not logged in
                 //dothis: redirect homepage
+                $("#statusModal").modal("show");
+                $("#statusModalBody").load("signup_failure.html");
+                setTimeout(()=> {
+                    $("#statusModal").modal("hide");
+                    $("#statusModalBody").empty();
+                    location="/ExchangePlatform";
+                }, 2000);
             } else { //failure
                 //done: show modal of failure, clear all field and ask the boi to try again later.
                 $("#statusModal").modal("show");
