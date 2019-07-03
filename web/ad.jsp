@@ -174,16 +174,25 @@ if (currentUserName != null) {
                         </div>
                     </div>
                 </div>
-                <div class="card mp-mat-sha-1 mt-4">
-                    <div class="card-body">
+                <div class="card mp-mat-sha-1 mt-4" style="transition: height 0.25s ease-in">
+                    <div class="card-body text-center">
                         <h2 class="">Seller Description</h1>
-                        <p class="text-left h5 text-muted" >
-                            <a id="ad_uname_holder" href=""></a>                    <%-- !! --%>
-                        </p>
-                        <%-- <div id="ContactThem">
-                            <button id="ContactThemBtn" data-toggle="modal" data-target="#login_to_view_modal" class="btn btn-outline-success btn-block mt-3">Contact Them</button>
-                        </div> --%>
-                        <button id="ContactThemBtn" class="btn btn-outline-success btn-block mt-3">Contact Them</button>
+                        <div>
+                            <small class="text-muted">Seller username</small>
+                            <div class="h3">
+                                <a id="ad_uname_holder" href=""></a>                    <%-- !! --%>
+                            </div>
+                        </div>
+                        <div id="ContactThem" class="text-center">
+                            <div id="contactLoadStatus" class="spinner-border d-none" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <button id="ContactThemBtn" class="btn btn-outline-success btn-block mt-3">Contact Them</button>
+                            <div id="contactResponseHolder">
+                                <div id="crh_msg"></div>
+                                <div id="crh_extra"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card mp-mat-sha-1 mt-4">

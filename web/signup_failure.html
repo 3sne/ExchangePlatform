@@ -7,7 +7,7 @@
         -moz-border-radius: 50%;
         -ms-border-radius: 50%;
         border-radius: 50%;
-        margin: 50px auto;
+        /* margin: 50px auto; */
         padding: 0;
         position: relative;
         box-sizing: content-box;
@@ -145,8 +145,7 @@
         animation: animateXMark 0.5s;
     }
 </style>
-<p class="h3 text-center">Something went wrong, try again later</p>
-<div class="cross-icon cross-delete animateDeleteIcon" style="display: block;">
+<div id="animatedError" class="cross-icon mx-auto cross-delete animateDeleteIcon" style="display: block;">
     <span class="cross-x-mark animateXMark">
         <span class="cross-delete-line cross-delete-left"></span>
         <span class="cross-delete-line cross-delete-right"></span>

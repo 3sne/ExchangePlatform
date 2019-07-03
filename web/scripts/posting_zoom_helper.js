@@ -60,6 +60,7 @@ $(document).ready(() => {
 
     $("#ContactThemBtn").click(() => {
         epglobals.zoomedAdData;
+        epglobals.toggleSpinner("#ContactThemBtn", "#contactLoadStatus", "d-none");
         let conForPTarget = 'http://localhost:8084/ExchangePlatform/contactHelper';
         let conForP = {
             forAdId: epglobals.zoomedAdData.ad_id,
@@ -71,14 +72,44 @@ $(document).ready(() => {
             type: 'POST',
             data: conForP,
             success: (data) => {
-                console.log("[CONT_BTN] recv: ", data);
-                if (data.code === 100) {
-                    //dothis: display phno no problem
-                } else if (data.code === 201) {
-                    //dothis: Ask our boyo to login (modal?)
-                } else {
-                    //dothis: Show error modal?
-                }
+                epglobals.toggleSpinner("#ContactThemBtn", "#contactLoadStatus", "d-none");
+                $("#ContactThemBtn").addClass("d-none");
+                 console.log("[CONT_BTN] recv: ", data);
+                 if (data.code === 100) {
+                     //done: display phno no problem
+                     let interData = data.contactNumber
+                     $("#crh_msg").load("signup_success.html");
+                     setTimeout(() => {
+                        $("#crh_msg").empty();
+                        $("#crh_msg").append(`
+                            <small class="text-muted">${epglobals.zoomedAdData.ad_poster_uname}'s phone number</small>
+                            <p class="h2">+91 ${interData}</p>
+                        `);
+                        $("#crh_extra").empty();
+                     }, 1500);
+                 } else if (data.code === 201) {
+                     //done: Ask our boyo to login (modal?)
+                     $("#crh_msg").append(`
+                        <p class="h5">Please login to reveal details.</p>
+                    `);
+                     $("#crh_extra").load("signup_failure.html");
+                     setTimeout(() => {
+                         $("#crh_extra").empty();
+                         $("#crh_msg").empty();
+                         $("#ContactThemBtn").removeClass("d-none");
+                     }, 1500);
+                 } else {
+                     //dothis: Show error modal?
+                     $("#done").append(`
+                        <p class="h6">Something went wrong.</p>
+                    `);
+                     $("#crh_extra").load("signup_failure.html");
+                     setTimeout(() => {
+                         $("#crh_extra").empty();
+                         $("#crh_msg").empty();
+                         $("#ContactThemBtn").removeClass("d-none");
+                     }, 1500);
+                 }
             }
         }
         $.ajax(conForPTarget, conForPPayload).done(() => {

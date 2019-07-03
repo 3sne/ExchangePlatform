@@ -38,7 +38,7 @@ public class ContactHelper extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             HttpSession session = request.getSession();
@@ -78,7 +78,6 @@ public class ContactHelper extends HttpServlet {
         } catch (SQLException e) {
             System.out.println("[ContactHelper] oopsie :(");
             out.println("{\"code\": 999, \"data\": \"DB Barfed\"}");
-            e.printStackTrace();
         } finally {
             out.close();
         }
