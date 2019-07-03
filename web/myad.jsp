@@ -34,7 +34,7 @@ if (currentUserName != null) {
 
         .c-row {
             min-height: 10rem;
-            /* max-height: 16rem; */
+            max-height: 16rem;
             /* height: 16rem; */
             overflow: hidden;
         }
@@ -89,44 +89,7 @@ if (currentUserName != null) {
 
     <div id="loader" class="my-loader d-none"></div>
 
-    <div class="container mt-5">
-        <div class="card mp-mat-sha-1">
-            <div class="row flex-wrap c-row">
-                <div class="col-md-3 col-lg-4">
-                    <div class="img_wrapper h-100">
-                        <img class="card-img-top" src="assets/images/404-bg-1.jpg" height="100%" alt="Card image cap">
-                    </div>
-                </div>
-                <div class="col-md-9 col-lg-8 mt-3 mb-3">
-                    <div>
-                        <div class="row mr-2">
-                            <div class="col-6">
-                                <h4 class="card-title">Chemistry Notes</h4>
-                                <h4 class="card-subtitle text-muted">Rs 10000</h4>
-                            </div>
-                            <div class="col-6 text-right">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-outline-success" data-toggle="tooltip"
-                                        data-placement="top" title="Mark as Sold"><i
-                                            class="fas fa-dollar-sign"></i></span></button>
-                                    <button type="button" class="btn btn-outline-danger" data-toggle="tooltip"
-                                        data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="cont_desc card-text mt-2 mr-2">This card has a regular title and short paragraphy of text
-                        below
-                        it.
-                        Description of 3-4 lines should suffice in this placeholder text bs thingy.
-                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                    </p>
-                    <p class="card-text"><small class="text-muted">Date</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <div id="myAdsListCont" class="container mt-5"></div>
 
     <div id="site_footer" role="footer" class="container-fluid"></div>
 
@@ -142,11 +105,6 @@ if (currentUserName != null) {
     <script src="scripts/myads_helper.js"></script>
 
     <script src="https://kit.fontawesome.com/9c19a5120e.js"></script>
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
 </body>
 
 </html>

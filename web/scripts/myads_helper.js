@@ -1,4 +1,8 @@
 $(document).ready(() => {
+    epglobals.toggleSpinner("#myAdsListCont", "#loader", "d-none");
+    const editClick = () => {
+
+    };
     const myadsep = 'myAds';
     const myadpl = {
         data: {},
@@ -6,14 +10,108 @@ $(document).ready(() => {
         type: 'POST',
         success: (data) => {
             console.log(data);
-            data.code = 101;
+            epglobals.toggleSpinner("#myAdsListCont", "#loader", "d-none");
             if (data.code === 100) {
-                console.log("YAY");
+                console.log("[MYADS] YAY");
+                const realdata = data.ad_list;
+
+                $("#myAdsListCont").append(`
+                    <h1 class="display-4 mb-5 mt-3 text-right">${$("#session_uname_capture").val()}'s Active Listings.</h1>
+                `);
+
+
+                for (const posting of realdata) {
+                    let ad_id = posting.ad_id;
+                    let ad_poster_id = posting.ad_poster_id;
+                    let ad_category_id = posting.ad_category_id;
+                    let ad_title = posting.ad_title;
+                    let ad_price = posting.ad_price;
+                    let ad_desc = posting.ad_desc;
+                    let ad_date = new Date(posting.ad_date).toDateString();
+                    let ad_location_id = posting.ad_location_id;
+                    let ad_location_city = posting.ad_location_city;
+                    let ad_location_state = posting.ad_location_state;
+
+                    let ahtmlsnip = `
+                    <a style="text-decoration: none; color: inherit;" href="ad.jsp?id=${ad_id}">
+                    <div class="card mt-3 mp-mat-sha-1">
+                        <div class="row flex-wrap c-row">
+                            <div class="col-md-3 col-lg-4">
+                                <div class="img_wrapper h-100">
+                                    <img class="card-img-top" src="assets/images/404-bg-1.jpg" height="100%" alt="Card image cap">
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-8 mt-3 mb-3">
+                                <div>
+                                    <div class="row mr-2">
+                                        <div class="col-10">
+                                            <h4 class="card-title">${ad_title}</h4>
+                                            <h4 class="card-subtitle text-muted">&#8377; ${ad_price}</h4>
+                                        </div>
+                                        <div class="col-2 text-right">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-outline-success mas-button" data-toggle="tooltip" data-placement="top" data-postingid="${ad_id}" data-postingcat="${ad_category_id}" data-posterid="${ad_poster_id}" title="Mark as Sold"><i class="fas fa-dollar-sign"></i></span></button>
+                                                <button type="button" class="btn btn-outline-danger trash-button" data-toggle="tooltip" data-placement="top" data-postingid="${ad_id}" data-postingcat="${ad_category_id}" data-posterid="${ad_poster_id}" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cont_desc card-text mt-2 mr-2">${ad_desc}</div>
+                                <div class="row mr-2">
+                                    <p class="col-4 card-text my-auto"><small class="text-muted">${ad_date}</small></p>
+                                    <p class="col-8 card-text my-auto text-right"><small class="text-muted">${ad_location_city}, ${ad_location_state}</small></p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    `;
+                    $("#myAdsListCont").append(ahtmlsnip);
+                }
+                // activate tooltips
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip();
+                    $('.mas-button').click((e) => {
+                        console.log(e);
+                    });
+                });
+            
             } else if (data.code === 101) { // no ads posted by user yet
-                console.log("NO ADS POSTED BY USER");
+                console.log("[MYADS] NO ADS POSTED BY USER");
+                const noadsmsg = `
+                    <div class="jumbotron m-4">
+                        <h1 class="display-4">Hello, ${$("#session_uname_capture").val()} !</h1>
+                        <p class="lead">You haven't posted any ads on ExchangePlatform yet. Click on the sell button above to get started!</p>
+                        <hr class="my-4">
+                        <p>You will be able to see the ads created by you on this page. Hope we see you soon!.</p>
+                    </div>
+                `;
+                $("#myAdsListCont").html(noadsmsg);
+
+            
             } else if (data.code === 201) { //boyo not logged in get him out of here!!
-                
-            }
+                $("#myAdsListCont").load("signup_failure.html");
+                setTimeout(() => {
+                    location = '/ExchangePlatform';
+                }, 2000);
+            
+            
+            } else { //misc errors
+                const stwbad = `
+                    <div class="jumbotron m-4">
+                        <h1 class="display-4">Hello, ${$("#session_uname_capture").val()} !</h1>
+                        <p class="lead">It seems like some bugs need to be squashed! Please visit again after sometime to see if things are working.</p>
+                        <hr class="my-4">
+                        <p>Meanwhile, you can hangout and check what others are posting.</p>
+                        <a class="btn btn-outline-success btn-lg" href="/ExchangePlatform" role="button">Home</a>
+                    </div>
+                `;
+                $("#myAdsListCont").html(stwbad);
+            };
+        },
+        error: (data) => {
+            epglobals.toggleSpinner("#myAdsListCont", "#loader", "d-none");
         }
     }
     $.ajax(myadpl).done(() => {
