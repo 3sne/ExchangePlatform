@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -77,12 +78,27 @@ public class SignUp extends HttpServlet {
             System.out.println("[SignUp] Rows Affected >> " + Integer.toString(SignUpResult));
 
             if (SignUpResult == 1) {
-                HttpSession session = request.getSession();
-                session.setAttribute("currentUserName", uname);
-                session.setAttribute("currentUserEmail", email);
-                out.println("{\"code\": 100, \"data\": \"Sign up successful\", \"username\": \"" + uname+ "\"}");
+                
+                
+                String loginSql = "SELECT uid from user where email=? and pword=?";
+                PreparedStatement prepLoginStmt = con.prepareStatement(loginSql);
+                prepLoginStmt.setString(1, email);
+                prepLoginStmt.setString(2, password);
+                ResultSet resultLoginSuccess = prepLoginStmt.executeQuery();
+                String uid;
+                
+                if (resultLoginSuccess.next()) {
+                    uid = resultLoginSuccess.getString("uid");
+                    HttpSession session = request.getSession();
+                    session.setAttribute("currentUserName", uname);
+                    session.setAttribute("currentUserId", uid);
+                    session.setAttribute("currentUserEmail", email);
+                    out.println("{\"code\": 100, \"data\": \"Sign up successful\", \"username\": \"" + uname+ "\"}");
+                } else {
+                    out.println("{\"code\": 997, \"data\": \"Server Error 1\"}");
+                }
             } else { 
-                out.println("{\"code\": 998, \"data\": \"Server Error\"}");
+                out.println("{\"code\": 998, \"data\": \"Server Error 2\"}");
             }
 
             

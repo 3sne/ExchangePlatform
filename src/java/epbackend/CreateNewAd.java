@@ -43,10 +43,11 @@ public class CreateNewAd extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session = request.getSession();
-            String cuname = session.getAttribute("currentUserName").toString();
-            String cuid = session.getAttribute("currentUserId").toString();
-            System.out.println(cuname + " " + cuid);
-            if (cuname == "" || cuid == "") {
+            String cuname, cuid;
+            if (session.getAttribute("currentUserName") != null && session.getAttribute("currentUserId") != null) {
+                cuname = session.getAttribute("currentUserName").toString();
+                cuid = session.getAttribute("currentUserId").toString();
+            } else { // boyo not login
                 out.println("{\"code\": 201, \"data\": \"USER NOT LOGGED IN\"}");
                 out.close();
                 return;
