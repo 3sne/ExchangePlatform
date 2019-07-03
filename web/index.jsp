@@ -108,7 +108,7 @@ if (currentUserName != null) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="assets/external-scripts/jquery.loadTemplate.js"></script>
-    <script>$("#navbar-container").load("navbar.html")</script>
+    <script>$("#navbar-container").load("navbar.html");</script>
     <script src="scripts/posting_loader.js"></script>
     <script src="scripts/ajax_helper_main.js"></script>
 

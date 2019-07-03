@@ -77,15 +77,17 @@ public class LocFetch extends HttpServlet {
                 City c = new City();
                 c.cityId = gotCity.getString("city_id");
                 c.cityName = gotCity.getString("city_name");
-                System.out.println(gotCity.getString("city_id"));
-                System.out.println(gotCity.getString("city_name"));
+//                System.out.println(gotCity.getString("city_id"));
+//                System.out.println(gotCity.getString("city_name"));
                 cl.cityList.add(c);
             }
 
             if (cl.cityList.size() > 0) {
                 cl.code = 100;
+                System.out.println("[LocFetch] Success");
             } else {
                 cl.code = 101;
+                System.out.println("[LocFetch] Failure");
             }
 
             String packedJsonString = g.toJson(cl);

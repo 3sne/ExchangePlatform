@@ -122,6 +122,17 @@ if (currentUserName != null) {
 <body>
     <input type="hidden" id="session_uname_capture" name="session_uname_capture" value="<%=currentUserName%>" />
 
+    <!-- Status Modal -->
+    <div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="successModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div id="statusModalBody" class="modal-body">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid" style="background: linear-gradient(to right,#ff8a00,#da1b60);">
         <div class="row">
             <div class="col-4">

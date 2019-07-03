@@ -39,7 +39,7 @@ public class CreateNewAd extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             HttpSession session = request.getSession();
@@ -55,17 +55,10 @@ public class CreateNewAd extends HttpServlet {
             String aprice = request.getParameter("adprice");
             String acat = request.getParameter("adcat");
             String alocid = request.getParameter("adlocid");
+            String aphone = request.getParameter("adphone");
             
             // dothis: input sanitization
-            System.out.println(atitle + " \n" + adesc+ " \n" +aprice+ " \n" +acat+ " \n" +alocid);
-//            String tryEmail = request.getParameter("tryEmail");
-//            System.out.println(tryEmail);
-//            
-//            if (tryEmail.isEmpty()){
-//                out.println("{\"code\": 102, \"data\": \"No e-mail value received\"}");
-//                out.close();
-//                return;
-//            }
+            System.out.println(atitle + " \n" + adesc+ " \n" +aprice+ " \n" +acat+ " \n" +alocid + " \n" + aphone);
 
             Connection con = DBConnector.getCon();
             if (con == null) {
@@ -74,7 +67,7 @@ public class CreateNewAd extends HttpServlet {
                 return;
             }
             
-            String injAdSql = "INSERT INTO ads (uid, cid, city_id, title, description, price) VALUES (?, ?, ?, ?, ?, ?)";
+            String injAdSql = "INSERT INTO ads (uid, cid, city_id, title, description, price, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement injAd = con.prepareStatement(injAdSql);
             injAd.setString(1, cuid);
             injAd.setString(2, acat);
@@ -82,6 +75,7 @@ public class CreateNewAd extends HttpServlet {
             injAd.setString(4, atitle);
             injAd.setString(5, adesc);
             injAd.setString(6, aprice);
+            injAd.setString(7, aphone);
             int injAdResult = injAd.executeUpdate();
             System.out.println("[injAd] Rows Affected >> " + Integer.toString(injAdResult));
 
