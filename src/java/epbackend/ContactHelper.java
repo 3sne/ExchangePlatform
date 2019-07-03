@@ -12,8 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,42 +24,37 @@ import javax.servlet.http.HttpSession;
  *
  * @author fsociety
  */
-@WebServlet(name = "CreateNewAd", urlPatterns = {"/createNewAd"})
-public class CreateNewAd extends HttpServlet {
+@WebServlet(name = "ContactHelper", urlPatterns = { "/contactHelper" })
+public class ContactHelper extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        response.setContentType("application/json;charset=UTF-8");
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             HttpSession session = request.getSession();
-            String cuname = session.getAttribute("currentUserName").toString();
-            String cuid = session.getAttribute("currentUserId").toString();
-            System.out.println(cuname + " " + cuid);
-            if (cuname == "" || cuid == "") {
+            String cuname, cuid;
+            if (session.getAttribute("currentUserName") != null) {
+                cuname = session.getAttribute("currentUserName").toString();
+                cuid = session.getAttribute("currentUserId").toString();
+            } else { // boyo not login
                 out.println("{\"code\": 201, \"data\": \"USER NOT LOGGED IN\"}");
                 out.close();
                 return;
             }
 
-            String atitle = request.getParameter("adtitle");
-            String adesc = request.getParameter("addesc");
-            String aprice = request.getParameter("adprice");
-            String acat = request.getParameter("adcat");
-            String alocid = request.getParameter("adlocid");
-            String aphone = request.getParameter("adphone");
-            
-            // dothis: input sanitization
-            System.out.println(atitle + " \n" + adesc+ " \n" +aprice+ " \n" +acat+ " \n" +alocid + " \n" + aphone);
+            System.out.println("[ContactHelper] GOT > " + cuname + " " + cuid);//
+            String concernedAdId = request.getParameter("forAdId");
+            String requestedBy = request.getParameter("forUserBrowsing");
 
             Connection con = DBConnector.getCon();
             if (con == null) {
@@ -68,25 +62,23 @@ public class CreateNewAd extends HttpServlet {
                 out.close();
                 return;
             }
-            
-            String injAdSql = "INSERT INTO ads (uid, cid, city_id, title, description, price, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement injAd = con.prepareStatement(injAdSql);
-            injAd.setString(1, cuid);
-            injAd.setString(2, acat);
-            injAd.setString(3, alocid);
-            injAd.setString(4, atitle);
-            injAd.setString(5, adesc);
-            injAd.setString(6, aprice);
-            injAd.setString(7, aphone);
-            int injAdResult = injAd.executeUpdate();
-            System.out.println("[injAd] Rows Affected >> " + Integer.toString(injAdResult));
 
-            if (injAdResult == 1) {
-                out.println("{\"code\": 100, \"data\": \"Ad creation successful\"}");
-            } else { 
-                out.println("{\"code\": 998, \"data\": \"Server Error\"}");
+            String contactGetSql = "SELECT phone as contactNumber from ads where adid=?";
+            PreparedStatement prepCG = con.prepareStatement(contactGetSql);
+            prepCG.setString(1, concernedAdId);
+            ResultSet gotContact = prepCG.executeQuery();
+
+            if (gotContact.next()) {
+                String contactNumber = gotContact.getString("contactNumber");
+                out.println("{\"code\": 100, \"data\": \"YASS\", \"contactNumber\": \""+ contactNumber+ "\"}");
+            } else {
+                out.println("{\"code\": 101, \"data\": \"No contact found, something is not right :L\"}");
             }
-            
+
+        } catch (SQLException e) {
+            System.out.println("[ContactHelper] oopsie :(");
+            out.println("{\"code\": 999, \"data\": \"DB Barfed\"}");
+            e.printStackTrace();
         } finally {
             out.close();
         }
@@ -104,11 +96,7 @@ public class CreateNewAd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateNewAd.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -122,11 +110,7 @@ public class CreateNewAd extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateNewAd.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

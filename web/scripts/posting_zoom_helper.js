@@ -21,6 +21,7 @@ $(document).ready(() => {
         success: (data) => {
             if (data.code === 100) { //success
                 let conc_obj = data.mPze;
+                epglobals.zoomedAdData = conc_obj;
                 let ad_id = conc_obj.ad_id;
                 let ad_poster_id = conc_obj.ad_poster_id;
                 let ad_poster_uname = conc_obj.ad_poster_uname;
@@ -48,8 +49,41 @@ $(document).ready(() => {
             }
         }
     }
+    
     $.ajax(posting_zoom_url, posting_fetch_payload).done(() => {
         console.log("[AJAX] DONE POSTING ZOOM FETCH");
+    });
+
+    // if ($("#session_uname_capture").val() != '') {
+    //     $("#ContactThemBtn").attr('data-toggle', 'modal')
+    // }
+
+    $("#ContactThemBtn").click(() => {
+        epglobals.zoomedAdData;
+        let conForPTarget = 'http://localhost:8084/ExchangePlatform/contactHelper';
+        let conForP = {
+            forAdId: epglobals.zoomedAdData.ad_id,
+            forUserBrowsing: $("#session_uname_capture").val()
+        }
+
+        let conForPPayload = {
+            url: conForPTarget,
+            type: 'POST',
+            data: conForP,
+            success: (data) => {
+                console.log("[CONT_BTN] recv: ", data);
+                if (data.code === 100) {
+                    //dothis: display phno no problem
+                } else if (data.code === 201) {
+                    //dothis: Ask our boyo to login (modal?)
+                } else {
+                    //dothis: Show error modal?
+                }
+            }
+        }
+        $.ajax(conForPTarget, conForPPayload).done(() => {
+            console.log("[CONT_BTN] Contact Detail Fetch Attempted");
+        });
     });
 });
 
