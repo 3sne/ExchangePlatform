@@ -71,6 +71,17 @@ if (currentUserName != null) {
 </head>
 
 <body>
+    <script type="text/html" id="template">
+        <button id="dd-toggle" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" data-content="username">
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <button class="dropdown-item" type="button">My Ads</button>
+            <button class="dropdown-item" type="button">Settings</button>
+            <button class="dropdown-item" type="button" id="dd-user-logout">Logout</button>
+        </div>
+    </script>
+
     <input type="hidden" id="session_uname_capture" name="session_uname_capture" value="<%=currentUserName%>" />
     <!-- BACKGROUND TILT -->
     <div id="fancylinething"></div>
@@ -114,17 +125,6 @@ if (currentUserName != null) {
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/9c19a5120e.js"></script>
-
-    <script type="text/html" id="template">
-        <button id="dd-toggle" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false" data-content="username">
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button">My Ads</button>
-            <button class="dropdown-item" type="button">Settings</button>
-            <button class="dropdown-item" type="button" id="dd-user-logout">Logout</button>
-        </div>
-    </script>
 
 </body>
 

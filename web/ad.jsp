@@ -106,6 +106,17 @@ if (currentUserName != null) {
 </head>
 
 <body>
+    <script type="text/html" id="template">
+        <button id="dd-toggle" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" data-content="username">
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <button class="dropdown-item" type="button">My Ads</button>
+            <button class="dropdown-item" type="button">Settings</button>
+            <button class="dropdown-item" type="button" id="dd-user-logout">Logout</button>
+        </div>
+    </script>
+
     <input type="hidden" id="session_uname_capture" name="session_uname_capture" value="<%=currentUserName%>" />
     <!-- BACKGROUND TILT -->
     <%-- <div id="fancylinething"></div> --%>
@@ -169,7 +180,10 @@ if (currentUserName != null) {
                         <p class="text-left h5 text-muted" >
                             <a id="ad_uname_holder" href=""></a>                    <%-- !! --%>
                         </p>
-                        <button class="btn btn-outline-success btn-block mt-3">Contact Them</button>
+                        <%-- <div id="ContactThem">
+                            <button id="ContactThemBtn" data-toggle="modal" data-target="#login_to_view_modal" class="btn btn-outline-success btn-block mt-3">Contact Them</button>
+                        </div> --%>
+                        <button id="ContactThemBtn" class="btn btn-outline-success btn-block mt-3">Contact Them</button>
                     </div>
                 </div>
                 <div class="card mp-mat-sha-1 mt-4">
@@ -201,17 +215,6 @@ if (currentUserName != null) {
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/9c19a5120e.js"></script>
-
-    <script type="text/html" id="template">
-        <button id="dd-toggle" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false" data-content="username">
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button">My Ads</button>
-            <button class="dropdown-item" type="button">Settings</button>
-            <button class="dropdown-item" type="button" id="dd-user-logout">Logout</button>
-        </div>
-    </script>
 
 </body>
 
