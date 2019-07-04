@@ -14,11 +14,19 @@ $(document).ready(() => {
             if (data.code === 100) {
                 console.log("[MYADS] YAY");
                 const realdata = data.ad_list;
+                let _counter = {
+                    activeAds: 0,
+                    inactiveAds: 0,
+                    totalAds: () => activeAds + inactiveAds
+                }
 
                 $("#myAdsListCont").append(`
                     <h1 class="display-4 mb-5 mt-3 text-right">${$("#session_uname_capture").val()}'s Active Listings.</h1>
                 `);
 
+                $("#myInactiveAdsListCont").append(`
+                    <h1 class="display-4 mb-5 mt-3 text-right">${$("#session_uname_capture").val()}'s Archived Listings.</h1>
+                `);
 
                 for (const posting of realdata) {
                     let ad_id = posting.ad_id;
@@ -31,9 +39,10 @@ $(document).ready(() => {
                     let ad_location_id = posting.ad_location_id;
                     let ad_location_city = posting.ad_location_city;
                     let ad_location_state = posting.ad_location_state;
+                    let ad_status = posting.ad_status;
 
                     let ahtmlsnip = `
-                    <div class="card mt-3 mp-mat-sha-1">
+                    <div id="posting_card_${ad_id}" class="card mt-4 mp-mat-sha-1">
                         <div class="row flex-wrap c-row">
                             <div class="col-md-3 col-lg-4">
                                 <div class="img_wrapper h-100">
@@ -54,6 +63,9 @@ $(document).ready(() => {
                                                 <button type="button" class="btn btn-outline-success mas-button" data-toggle="tooltip" data-placement="top" data-postingid="${ad_id}" data-postingcat="${ad_category_id}" data-posterid="${ad_poster_id}" title="Mark as Sold"><i class="fas fa-dollar-sign"></i></span></button>
                                                 <button type="button" class="btn btn-outline-danger trash-button" data-toggle="tooltip" data-placement="top" data-postingid="${ad_id}" data-postingcat="${ad_category_id}" data-posterid="${ad_poster_id}" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                             </div>
+                                            <div>
+                                                <span id="ad_status_badge_${ad_id}" class="badge badge-dark">${(ad_status==1) ? "ACTIVE":"SOLD"}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -67,8 +79,33 @@ $(document).ready(() => {
                         </div>
                     </div>
                     `;
-                    $("#myAdsListCont").append(ahtmlsnip);
+                    if (ad_status == 0) { // Inactive
+                        _counter.inactiveAds += 1;
+                        $("#myInactiveAdsListCont").append(ahtmlsnip);
+                        $("#posting_card_" + ad_id)
+                            .addClass("bg-success")
+                            .addClass("text-white")
+                            .find(".mas-button")
+                            .remove();
+                        $("#posting_card_" + ad_id)
+                            .find(".text-muted")
+                            .removeClass("text-muted");
+
+                    } else if (ad_status == 1) { //Active
+                        _counter.activeAds += 1;
+                        $("#myAdsListCont").append(ahtmlsnip);
+                    }
                 }
+
+                if (_counter.inactiveAds === 0) {
+                    $("#myInactiveAdsListCont").empty();
+                }
+
+                if (_counter.activeAds === 0) {
+                    $("#myAdsListCont").empty();
+                }
+
+
                 // activate tooltips
                 $(function () {
                     $('[data-toggle="tooltip"]').tooltip();
@@ -88,9 +125,35 @@ $(document).ready(() => {
                             method: 'POST',
                             success: (data) => {
                                 console.log(data);
+                                switch (data.code) {
+                                    case 100: // success
+                                        // 1.disable tooltip
+                                        $("#posting_card_" + posting_id).find('.mas-button').tooltip('destroy');
+                                        
+                                        // 2.Change Card UI
+                                        $("#posting_card_" + posting_id)
+                                            .addClass("bg-success")
+                                            .addClass("text-white")
+                                            .find(".mas-button")
+                                            .remove();
+                                        $("#posting_card_" + posting_id).find(".text-muted").removeClass("text-muted");
+                                        
+                                        // 3. Change Badge
+                                        $("#ad_status_badge_" + posting_id).val('SOLD');
+
+                                        // 4. Pop & Push to #myInactiveAdsListCont
+                                        setTimeout(() => {
+                                            $("#posting_card_" + posting_id).appendTo("#myInactiveAdsListCont");
+                                        }, 500);
+                                        
+                                        break;
+                                
+                                    default:
+                                        break;
+                                }
                             },
                             error: (data) => {
-                                console.log(data);
+                                console.log('[MAS] ERROR! ', data);
                             }
                         });
                     });
@@ -109,10 +172,19 @@ $(document).ready(() => {
                             },
                             method: 'POST',
                             success: (data) => {
-                                console.log(data);
+                                switch (data.code) {
+                                    case 100: // success
+                                        // 1.disable tooltip
+                                        $("#posting_card_" + posting_id).find('.mas-button').tooltip('destroy');
+                                        $("#posting_card_" + posting_id).remove();
+                                        break;
+                                
+                                    default:
+                                        break;
+                                }
                             },
                             error: (data) => {
-                                console.log(data);
+                                console.log('[DEL] ERROR! ', data);
                             }
                         });
                     });

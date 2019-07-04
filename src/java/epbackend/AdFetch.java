@@ -40,6 +40,7 @@ public class AdFetch extends HttpServlet {
         String ad_location_id;
         String ad_location_city;
         String ad_location_state;
+        String ad_status;
     }
 
     public static class AdJsonHelper {

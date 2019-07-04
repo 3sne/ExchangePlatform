@@ -54,9 +54,6 @@ if (currentUserName != null) {
         }
 
         .my-loader {
-            position: absolute;
-            left: 50%;
-            top: 50%;
             z-index: 1;
             width: 150px;
             height: 150px;
@@ -100,9 +97,10 @@ if (currentUserName != null) {
     <!-- NAVBAR -->
     <div id="navbar-container"></div>
 
-    <div id="loader" class="my-loader d-none"></div>
+    <div id="loader" class="my-loader d-none text-center"></div>
 
     <div id="myAdsListCont" class="container mt-5"></div>
+    <div id="myInactiveAdsListCont" class="container mt-5"></div>
 
     <div id="site_footer" role="footer" class="container-fluid"></div>
 

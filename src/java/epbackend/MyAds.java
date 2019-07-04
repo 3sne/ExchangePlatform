@@ -66,7 +66,8 @@ public class MyAds extends HttpServlet {
             }
             
             Gson g = new Gson();
-            String myAdSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.description, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id where a.uid=?";
+            // select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.description, a.price, date(a.timestamp), adst.status as tarikh from ads as a inner join cities as c inner join adstatus as adst on c.city_id=a.city_id and a.adid=adst.adid where a.uid=26 
+            String myAdSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.description, a.price, date(a.timestamp) as tarikh, adst.status from ads as a inner join cities as c inner join adstatus as adst on c.city_id=a.city_id and a.adid=adst.adid where a.uid=?";
             PreparedStatement prepMyAds = con.prepareStatement(myAdSql);
             prepMyAds.setString(1, cuid);
             ResultSet fetchedAdTuples = prepMyAds.executeQuery();
@@ -86,6 +87,7 @@ public class MyAds extends HttpServlet {
                 exAd.ad_location_id = fetchedAdTuples.getString("a.city_id");
                 exAd.ad_location_city = fetchedAdTuples.getString("c.city_name");
                 exAd.ad_location_state = fetchedAdTuples.getString("c.city_state");
+                exAd.ad_status = fetchedAdTuples.getString("adst.status");
                 ajh.ad_list.add(exAd);
                 System.out.println(exAd.ad_id);
             }
