@@ -119,7 +119,6 @@ $(document).ready(() => {
                             method: 'POST',
                             success: (data) => {
                                 console.log(data);
-                                data.code = 1;
                                 switch (data.code) {
                                     case 100: // success
                                         // 1.disable tooltip
