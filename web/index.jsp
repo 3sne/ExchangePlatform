@@ -67,6 +67,21 @@ if (currentUserName != null) {
         .mp-mat-sha-1:hover {
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
         }
+
+        .my-loader {
+            
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
     </style>
 </head>
 
@@ -101,7 +116,13 @@ if (currentUserName != null) {
     <!-- AD CONTAINER -->
     <div id="ad_container_custom" class="container"></div>
 
-    <div class="container mt-3">
+    <div class="container-fluid my-4">
+        <div class="row justify-content-center">
+            <div id="loader" class="my-loader d-none m-4 "></div>
+        </div>
+    </div>
+
+    <div class="container my-4">
         <div class="row justify-content-center">
             <button id="more_ad_loader" class="btn btn-outline-primary my-2" type="button">Show More</button>
         </div>
