@@ -63,8 +63,8 @@ $(document).ready(() => {
                                                 <button type="button" class="btn btn-outline-success mas-button" data-toggle="tooltip" data-placement="top" data-postingid="${ad_id}" data-postingcat="${ad_category_id}" data-posterid="${ad_poster_id}" title="Mark as Sold"><i class="fas fa-dollar-sign"></i></span></button>
                                                 <button type="button" class="btn btn-outline-danger trash-button" data-toggle="tooltip" data-placement="top" data-postingid="${ad_id}" data-postingcat="${ad_category_id}" data-posterid="${ad_poster_id}" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                             </div>
-                                            <div>
-                                                <span id="ad_status_badge_${ad_id}" class="badge badge-dark">${(ad_status==1) ? "ACTIVE":"SOLD"}</span>
+                                            <div id="err_badge_${ad_id}">
+                                                <span id="ad_status_badge_${ad_id}" class="badge badge-dark">${(ad_status == 1) ? "ACTIVE" : "SOLD"}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -82,14 +82,8 @@ $(document).ready(() => {
                     if (ad_status == 0) { // Inactive
                         _counter.inactiveAds += 1;
                         $("#myInactiveAdsListCont").append(ahtmlsnip);
-                        $("#posting_card_" + ad_id)
-                            .addClass("bg-success")
-                            .addClass("text-white")
-                            .find(".mas-button")
-                            .remove();
-                        $("#posting_card_" + ad_id)
-                            .find(".text-muted")
-                            .removeClass("text-muted");
+                        $("#posting_card_" + ad_id).addClass("bg-success").addClass("text-white").find(".mas-button").remove();
+                        $("#posting_card_" + ad_id).find(".text-muted").removeClass("text-muted");
 
                     } else if (ad_status == 1) { //Active
                         _counter.activeAds += 1;
@@ -125,11 +119,12 @@ $(document).ready(() => {
                             method: 'POST',
                             success: (data) => {
                                 console.log(data);
+                                data.code = 1;
                                 switch (data.code) {
                                     case 100: // success
                                         // 1.disable tooltip
                                         $("#posting_card_" + posting_id).find('.mas-button').tooltip('destroy');
-                                        
+
                                         // 2.Change Card UI
                                         $("#posting_card_" + posting_id)
                                             .addClass("bg-success")
@@ -137,7 +132,7 @@ $(document).ready(() => {
                                             .find(".mas-button")
                                             .remove();
                                         $("#posting_card_" + posting_id).find(".text-muted").removeClass("text-muted");
-                                        
+
                                         // 3. Change Badge
                                         $("#ad_status_badge_" + posting_id).val('SOLD');
 
@@ -145,10 +140,16 @@ $(document).ready(() => {
                                         setTimeout(() => {
                                             $("#posting_card_" + posting_id).appendTo("#myInactiveAdsListCont");
                                         }, 500);
-                                        
+
                                         break;
-                                
+
                                     default:
+                                        $("#err_badge_" + posting_id).append(`
+                                            <span id="temp_info_${posting_id}" class="badge badge-danger">ERROR</span>
+                                        `);
+                                        setTimeout(() => {
+                                            $("#temp_info_" + posting_id).remove();
+                                        }, 1000);
                                         break;
                                 }
                             },
@@ -178,8 +179,14 @@ $(document).ready(() => {
                                         $("#posting_card_" + posting_id).find('.mas-button').tooltip('destroy');
                                         $("#posting_card_" + posting_id).remove();
                                         break;
-                                
+
                                     default:
+                                        $("#err_badge_" + posting_id).append(`
+                                            <span id="temp_info_${posting_id}" class="badge badge-danger">ERROR</span>
+                                        `);
+                                        setTimeout(() => {
+                                            $("#temp_info_" + posting_id).remove();
+                                        }, 1000);
                                         break;
                                 }
                             },
