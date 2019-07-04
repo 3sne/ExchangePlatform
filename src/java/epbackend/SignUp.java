@@ -65,6 +65,17 @@ public class SignUp extends HttpServlet {
                 out.close();
                 return;
             }
+            
+            // Dupe email check
+            String isDupeEmailSql = "select email from user where email=?";
+            PreparedStatement prepDupeEmail = con.prepareStatement(isDupeEmailSql);
+            prepDupeEmail.setString(1, email);
+            ResultSet prepDupeEmailResult = prepDupeEmail.executeQuery();
+            if (prepDupeEmailResult.next()) {
+                out.println("{\"code\": 203, \"data\": \"email occupied\"}");
+                out.close();
+                return;
+            }
 
             // sign them up
             String signUpSql = "INSERT INTO user (email, uname, pword) VALUES (?, ?, ?)";

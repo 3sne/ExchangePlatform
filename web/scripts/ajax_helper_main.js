@@ -5,7 +5,8 @@ let epglobals = {
     s_login_p: '',
     s_signup_e: '',
     s_singup_p: '',
-
+    l_signup_e: '',
+    l_signup_p: '',
     //methods
     toggleSpinner: function(elemId, spinner, classPlay) {
         if ($(spinner).hasClass(classPlay)) {

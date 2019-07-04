@@ -1,0 +1,116 @@
+
+<form role="form">
+        
+        <div class="form-group"> 
+            <label>Email</label>
+            <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-user"></i></span>
+                </div>
+                <input class="form-control" id="ltGetSignUpEmail" name="ltGetSignUpEmail" placeholder="email" type="email" required>
+            </div>
+        </div>
+
+        <div class="form-group"> 
+            <label>What should we call you?</label>
+            <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-paper-plane"></i></span>
+                </div>
+                <input class="form-control" id="ltGetSignUpUname" name="ltGetSignUpUname" placeholder="username" type="text" pattern="^[a-z0-9_-]{4-20}$" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Choose a robust password</label>
+            <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                </div>
+                <input placeholder="Password" type="password" id="ltGetSignUpPwd" class="form-control" aria-describedby="passwordHelpInline">
+            </div>
+            <small id="passwordHelpInline" class="text-muted">
+                Must be atleast 8 characters long.
+            </small>
+        </div>
+        <div class="form-group">
+            <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                </div>
+                <input placeholder="Confirm Password" type="password" id="ltConfSignUpPwd" class="form-control" aria-describedby="passwordHelpInline">
+            </div>
+        </div>
+        <div class="text-center text-muted mt-2">
+            <p id="ltSutStat" style="color: red"></p>
+        </div>
+        <div class="text-center">
+            <button id="ltSignUpBtn" name="ltSignUpBtn" type="button" class="btn btn-success">Sign Up</button>
+        </div>
+    </form>
+    
+    <script>
+        $('#ltConfSignUpPwd').keyup(function() {
+            if ($('#ltConfSignUpPwd').val() !== $("#ltGetSignUpPwd").val() || $("#ltGetSignUpPwd").val().length < 8) {
+                $('#ltGetSignUpPwd').addClass("is-invalid");
+                $('#ltConfSignUpPwd').addClass("is-invalid");
+            } else {
+                $('#ltGetSignUpPwd').addClass("is-valid");
+                $('#ltConfSignUpPwd').addClass("is-valid");
+                $('#ltGetSignUpPwd').removeClass("is-invalid");
+                $('#ltConfSignUpPwd').removeClass("is-invalid");
+            }
+        });
+        
+        $("#ltSignUpBtn").click(function() {
+            $("#ltSutStat").text("");
+            
+            let e = $("#ltGetSignUpEmail").val();
+            let p = $("#ltGetSignUpPwd").val();
+            let u = $("#ltGetSignUpUname").val();
+    
+            //dothis: input validation
+    
+            if (e !== '' && p !== '' && u !== '') {
+                let reqUrl = 'signup';
+                let reqLoad = {
+                    data: {
+                        'email': e.trim(),
+                        'password': p,
+                        'uname': u.trim()
+                    },
+                    success: (data) => {
+                        let sResp = data;
+                        if (sResp.code === 100) {
+                            console.log("[LOGIN::SIGNUP] SignUp Successful >> ", sResp.username);
+                            epglobals._USERNAME = sResp.username;
+                            $("#loginModalContentHolder").load("signup_success.html");
+                            setTimeout(() => {
+                                //done: location = (GO TO POST AD AFTER SETTING SESSION PARAMS)
+                                location=location;
+                            }, 2000);
+                        } else if (sResp.code === 201) { // 201
+                            console.log("[LOGIN::SIGNUP] SignUp Unsuccessful :(");
+                            $("#ltGetLoginPass").val("");
+                            $("#ltSutStat").text("Invalid details, please try again.");
+                        } else if (sResp.code === 202) { //202
+                            console.log("[LOGIN::SIGNUP] SignUp Unsuccessful :(");
+                            $("#ltGetLoginPass").val("");
+                            $("#ltSutStat").text("Username already exists, please try again.");
+                        } else if (sResp.code === 203) { // already registered
+                            $("#ltGetLoginPass").val("");
+                            $("#ltSutStat").text("The email already has an account linked to it.");
+                        } else { // 999, 998
+                            console.log("[LOGIN::SIGNUP] SignUp Unsuccessful :(");
+                            $("#ltGetLoginPass").val("");
+                            $("#ltSutStat").text("Server Error, please try again later.");
+                        }
+                    },
+                    failure: (data) => {
+                        console.log("[ERROR] Path: /signup | ajax failure", data);
+                    }
+                };
+                $.ajax(reqUrl, reqLoad).done(() => {
+               });
+            }
+        });
+    </script>
