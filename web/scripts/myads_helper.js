@@ -70,7 +70,7 @@ $(document).ready(() => {
                                     </div>
                                 </div>
                                 <div class="cont_desc card-text mt-2 mr-2">${ad_desc}</div>
-                                <div class="row mr-2">
+                                <div class="cont_footer row mr-2">
                                     <p class="col-4 card-text my-auto"><small class="text-muted">${ad_date}</small></p>
                                     <p class="col-8 card-text my-auto text-right"><small class="text-muted">${ad_location_city}, ${ad_location_state}</small></p>
                                 </div>

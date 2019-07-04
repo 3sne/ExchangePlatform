@@ -48,9 +48,14 @@ if (currentUserName != null) {
         }
 
         .cont_desc {
-            max-height: 8rem;
+            max-height: 7rem;
             cursor: default;
             overflow: hidden;
+        }
+
+        .cont_footer {
+            min-height: 1.5rem;
+            cursor: default;
         }
 
         .my-loader {
