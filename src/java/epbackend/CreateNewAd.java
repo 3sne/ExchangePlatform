@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -70,7 +72,7 @@ public class CreateNewAd extends HttpServlet {
             }
             
             String injAdSql = "INSERT INTO ads (uid, cid, city_id, title, description, price, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement injAd = con.prepareStatement(injAdSql);
+            PreparedStatement injAd = con.prepareStatement(injAdSql, Statement.RETURN_GENERATED_KEYS);
             injAd.setString(1, cuid);
             injAd.setString(2, acat);
             injAd.setString(3, alocid);
@@ -82,7 +84,22 @@ public class CreateNewAd extends HttpServlet {
             System.out.println("[injAd] Rows Affected >> " + Integer.toString(injAdResult));
 
             if (injAdResult == 1) {
-                out.println("{\"code\": 100, \"data\": \"Ad creation successful\"}");
+
+                ResultSet newAd = injAd.getGeneratedKeys();
+                newAd.next();
+                int new_adid = newAd.getInt(1);
+                System.out.println("[CREATEAD] TEST NEW ID >>> " + new_adid);
+                String upStatusSql = "INSERT INTO adstatus (adid, status) VALUES (?, ?)";
+                PreparedStatement prepUpStatus = con.prepareStatement(upStatusSql);
+                prepUpStatus.setInt(1, new_adid);
+                prepUpStatus.setInt(2, 1);
+                int usr = prepUpStatus.executeUpdate();
+
+                if(usr == 1) {
+                    out.println("{\"code\": 100, \"data\": \"Ad creation successful\"}");
+                } else {
+                    out.println("{\"code\": 101, \"data\": \"Ad creation successful, but status is void\"}");
+                }
             } else { 
                 out.println("{\"code\": 998, \"data\": \"Server Error\"}");
             }
