@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -24,12 +25,12 @@ public class AdFetch extends HttpServlet {
     private static final long serialVersionUID = 1L;
     String maxAdCount = "";
     String adExcept = "";
-    
+
     public static class Data {
         public String max_ad_count;
         public List<Integer> ad_except;
     }
-    
+
     public static class Ad {
         String ad_id;
         String ad_poster_id;
@@ -42,36 +43,36 @@ public class AdFetch extends HttpServlet {
         String ad_location_city;
         String ad_location_state;
     }
-    
+
     public static class AdJsonHelper {
         ArrayList<Ad> ad_list;
         int code;
     }
-    
+
     public Data processJsonAdReq(String jsonLine) {
         // parse json string to Data object instance
         Gson gson = new Gson();
         Data data = gson.fromJson(jsonLine, Data.class);
         return data;
     }
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        
+
         response.setContentType("application/json; charset=utf-8");
         PrintWriter out = response.getWriter();
-        
+
         try {
             HttpSession session = request.getSession();
             Gson g = new Gson();
-            
+
             // Get json string from request
             StringBuilder sb = new StringBuilder();
             String s;
             while ((s = request.getReader().readLine()) != null) {
                 sb.append(s);
             }
-            
+
             // setting up members
             Data d = this.processJsonAdReq(sb.toString());
             this.maxAdCount = d.max_ad_count;
@@ -82,27 +83,34 @@ public class AdFetch extends HttpServlet {
                 }
             }
             System.out.println("CURR EXCEPTIONS " + this.adExcept);
-            
+
             Connection con = DBConnector.getCon();
             if (con == null) {
-                out.println("<script type='text/javascript'>alert('Chimcken nugger');</script>");
+                out.println("{\"code\": 999, \"data\": \"Failed to connect to DB\"}");
                 out.close();
                 return;
             }
-            Statement adFetchQuery = con.createStatement();
+
             ResultSet adResult;
+            String adFetchSql;
+            PreparedStatement prepAdFetch;
 
             // preparing the Ad Fetch Query
             if (this.adExcept.isEmpty()) {
-                adResult = adFetchQuery
-                    .executeQuery("select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id ORDER BY a.timestamp DESC limit " + this.maxAdCount);
-            }else{
-                adResult = adFetchQuery
-                    .executeQuery("select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id where a.adid NOT IN(" + this.adExcept + ") ORDER BY a.timestamp DESC limit " + this.maxAdCount);
+                adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id ORDER BY a.timestamp DESC limit ?";
+                prepAdFetch = con.prepareStatement(adFetchSql);
+                prepAdFetch.setString(1, this.maxAdCount);
+                adResult = prepAdFetch.executeQuery();
+            } else {
+                adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id where a.adid NOT IN(?) ORDER BY a.timestamp DESC limit ?";
+                prepAdFetch = con.prepareStatement(adFetchSql);
+                prepAdFetch.setString(1, this.adExcept);
+                prepAdFetch.setString(2, this.maxAdCount);
+                adResult = prepAdFetch.executeQuery();
             }
-            
+
             AdJsonHelper ajh = new AdJsonHelper();
-            ajh.ad_list = new ArrayList<Ad>(); 
+            ajh.ad_list = new ArrayList<Ad>();
             while (adResult.next()) {
                 Ad exAd = new Ad();
                 exAd.ad_id = adResult.getString("a.adid");
@@ -117,7 +125,7 @@ public class AdFetch extends HttpServlet {
                 ajh.ad_list.add(exAd);
                 System.out.println(exAd.ad_id);
             }
-            
+
             if (ajh.ad_list.size() > 0 && ajh.ad_list.size() <= Integer.parseInt(this.maxAdCount)) {
                 ajh.code = 100;
             } else {
@@ -130,7 +138,6 @@ public class AdFetch extends HttpServlet {
         }
     }
 
- 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -140,7 +147,6 @@ public class AdFetch extends HttpServlet {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

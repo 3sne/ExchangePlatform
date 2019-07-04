@@ -65,9 +65,7 @@ public class TrySell extends HttpServlet {
             String tryEmailSql = "select uid,uname,email from user where email=?";
             PreparedStatement prepSearchThisEmail = con.prepareStatement(tryEmailSql);
             prepSearchThisEmail.setString(1, tryEmail);
-            ResultSet gotEmail;
-
-            gotEmail = prepSearchThisEmail.executeQuery();
+            ResultSet gotEmail = prepSearchThisEmail.executeQuery();
 
             if (gotEmail.next()) { // user exists but not logged in.
                 String rUser = gotEmail.getString("uname");

@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -69,19 +70,15 @@ public class Ad extends HttpServlet {
             Connection con = DBConnector.getCon();
             if (con == null) {
                 System.out.println("something went wrong");
-                out.println("something went wrong");
+                out.println("{\"code\": 999, \"data\": \"Failed to connect to DB\"}");
                 out.close();
                 return;
             }
 
-            Statement adFetchQuery = con.createStatement();
-            ResultSet adResult;
-            System.out.println(req_ad_id);
-            // adResult = adFetchQuery.executeQuery("select * from ads,user where ads.adid="
-            // + req_ad_id + " and ads.uid=user.uid");
-            adResult = adFetchQuery.executeQuery(
-                    "select a.adid, a.uid, u.uname, u.email, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.description, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id inner join user as u on u.uid=a.uid where a.adid="
-                            + req_ad_id);
+            String adFetchSql = "select a.adid, a.uid, u.uname, u.email, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.description, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id inner join user as u on u.uid=a.uid where a.adid=?";
+            PreparedStatement prepAdFetch = con.prepareStatement(adFetchSql);
+            prepAdFetch.setString(1, req_ad_id);
+            ResultSet adResult = prepAdFetch.executeQuery();
 
             PostingZoomExport pze = new PostingZoomExport();
             if (adResult.next()) {

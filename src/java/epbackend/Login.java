@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -42,17 +42,16 @@ public class Login extends HttpServlet {
 
             Connection con = DBConnector.getCon();
             if (con == null) {
-                out.println("<script type='text/javascript'>alert('Chimcken nugger');</script>");
+                out.println("{\"code\": 999, \"data\": \"Failed to connect to DB\"}");
                 out.close();
                 return;
             }
-            Statement loginSuccess = con.createStatement();
-            Statement st1 = con.createStatement();
-            ResultSet resultLoginSuccess, rs1;
-            int i = 0;
 
-            resultLoginSuccess = loginSuccess
-                    .executeQuery("select * from user where email='" + email + "' and pword='" + password + "'");
+            String loginSql = "select * from user where email=? and pword=?";
+            PreparedStatement prepLoginSql = con.prepareStatement(loginSql);
+            prepLoginSql.setString(1, email);
+            prepLoginSql.setString(2, password);
+            ResultSet resultLoginSuccess = prepLoginSql.executeQuery();
 
             if (resultLoginSuccess.next()) { // success
                 String rUser = resultLoginSuccess.getString("uname");
