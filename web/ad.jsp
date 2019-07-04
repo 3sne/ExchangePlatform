@@ -111,7 +111,7 @@ if (currentUserName != null) {
             aria-expanded="false" data-content="username">
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button">My Ads</button>
+            <button class="dropdown-item" type="button" id="dd-user-ads">My Ads</button>
             <button class="dropdown-item" type="button">Settings</button>
             <button class="dropdown-item" type="button" id="dd-user-logout">Logout</button>
         </div>

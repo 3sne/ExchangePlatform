@@ -10,6 +10,8 @@ if (currentUserName != null) {
 } else {
     currentUserName = "";
     System.out.println("No user identified, session invalid");
+    String redirectURL = "/ExchangePlatform/";
+    response.sendRedirect(redirectURL);
 }
 
 %>
@@ -67,6 +69,16 @@ if (currentUserName != null) {
             animation: spin 2s linear infinite;
         }
 
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 
@@ -76,7 +88,7 @@ if (currentUserName != null) {
             aria-expanded="false" data-content="username">
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <button class="dropdown-item" type="button">My Ads</button>
+            <button class="dropdown-item" type="button" id="dd-user-ads">My Ads</button>
             <button class="dropdown-item" type="button">Settings</button>
             <button class="dropdown-item" type="button" id="dd-user-logout">Logout</button>
         </div>
