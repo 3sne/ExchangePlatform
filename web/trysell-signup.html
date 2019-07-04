@@ -63,9 +63,9 @@
             let reqUrl = 'http://localhost:8084/ExchangePlatform/signup';
             let reqLoad = {
                 data: {
-                    'email': e,
+                    'email': e.trim(),
                     'password': p,
-                    'uname': u
+                    'uname': u.trim()
                 },
                 success: (data) => {
                     let sResp = data;

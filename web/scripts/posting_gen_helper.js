@@ -48,26 +48,26 @@ $(document).on('click', '#fad_post_btn', () => {
 
     
     // val title
-    let ad_title = $("#fad_title").val();
+    let ad_title = $("#fad_title").val().trim();
     if (ad_title.length > 80) {
         return;
     }
 
     // val phone
-    let ad_phone = $("#fad_phone").val();
+    let ad_phone = $("#fad_phone").val().trim();
     var reg_phone = /^[0-9]{10}$/;
     if(!reg_phone.test(ad_phone)) {
         return;
     }
 
-    let ad_desc = CKEDITOR.instances.fad_desc.getData();
+    let ad_desc = CKEDITOR.instances.fad_desc.getData().trim();
 
     const ca_url = "http://localhost:8084/ExchangePlatform/createNewAd";
     let ca_data = {
         adcat: 2,
         adtitle: ad_title,
         addesc: ad_desc,
-        adprice: $("#fad_price").val(),
+        adprice: $("#fad_price").val().trim(),
         adlocid: $("#fad_city").val(),
         adphone: ad_phone
     }

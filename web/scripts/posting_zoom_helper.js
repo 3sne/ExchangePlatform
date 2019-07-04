@@ -64,7 +64,7 @@ $(document).ready(() => {
         let conForPTarget = 'http://localhost:8084/ExchangePlatform/contactHelper';
         let conForP = {
             forAdId: epglobals.zoomedAdData.ad_id,
-            forUserBrowsing: $("#session_uname_capture").val()
+            forUserBrowsing: $("#session_uname_capture").val().trim()
         }
 
         let conForPPayload = {

@@ -27,10 +27,10 @@
         let e = epglobals.s_login_e;
         let p = $("#getLoginPass").val();
         if (e !== '' && p !== '') {
-            let reqUrl = 'http://localhost:8084/ExchangePlatform/login';
+            let reqUrl = 'login';
             let reqLoad = {
                 data: {
-                    'email': e,
+                    'email': e.trim(),
                     'password': p
                 },
                 success: (data) => {
