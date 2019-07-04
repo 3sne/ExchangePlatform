@@ -33,7 +33,6 @@ $(document).ready(() => {
                     let ad_location_state = posting.ad_location_state;
 
                     let ahtmlsnip = `
-                    <a style="text-decoration: none; color: inherit;" href="ad.jsp?id=${ad_id}">
                     <div class="card mt-3 mp-mat-sha-1">
                         <div class="row flex-wrap c-row">
                             <div class="col-md-3 col-lg-4">
@@ -45,7 +44,9 @@ $(document).ready(() => {
                                 <div>
                                     <div class="row mr-2">
                                         <div class="col-10">
-                                            <h4 class="card-title">${ad_title}</h4>
+                                            <a style="text-decoration: none; color: inherit;" href="ad.jsp?id=${ad_id}">    
+                                                <h4 class="card-title">${ad_title}</h4>
+                                            </a>
                                             <h4 class="card-subtitle text-muted">&#8377; ${ad_price}</h4>
                                         </div>
                                         <div class="col-2 text-right">
@@ -65,18 +66,58 @@ $(document).ready(() => {
                             </div>
                         </div>
                     </div>
-                    </a>
                     `;
                     $("#myAdsListCont").append(ahtmlsnip);
                 }
                 // activate tooltips
                 $(function () {
                     $('[data-toggle="tooltip"]').tooltip();
-                    $('.mas-button').click((e) => {
-                        console.log(e);
+                    $('.mas-button').click(function (e) { // Mark as Sold
+                        const posting_id = $(this).attr('data-postingid');
+                        const posting_cat = $(this).attr('data-postingcat');
+                        const poster_id = $(this).attr('data-posterid');
+                        console.log('[MAS] ', posting_id, posting_cat, poster_id);
+                        $.ajax({
+                            url: 'adEdit',
+                            data: {
+                                sig: 'MAS',
+                                postingId: posting_id,
+                                postingCat: posting_cat,
+                                posterId: poster_id
+                            },
+                            method: 'POST',
+                            success: (data) => {
+                                console.log(data);
+                            },
+                            error: (data) => {
+                                console.log(data);
+                            }
+                        });
+                    });
+                    $(".trash-button").click(function () { // Delete Posting
+                        const posting_id = $(this).attr('data-postingid');
+                        const posting_cat = $(this).attr('data-postingcat');
+                        const poster_id = $(this).attr('data-posterid');
+                        console.log('[TRASH] ', posting_id, posting_cat, poster_id);
+                        $.ajax({
+                            url: 'adEdit',
+                            data: {
+                                sig: 'DEL',
+                                postingId: posting_id,
+                                postingCat: posting_cat,
+                                posterId: poster_id
+                            },
+                            method: 'POST',
+                            success: (data) => {
+                                console.log(data);
+                            },
+                            error: (data) => {
+                                console.log(data);
+                            }
+                        });
                     });
                 });
-            
+
             } else if (data.code === 101) { // no ads posted by user yet
                 console.log("[MYADS] NO ADS POSTED BY USER");
                 const noadsmsg = `
@@ -89,14 +130,14 @@ $(document).ready(() => {
                 `;
                 $("#myAdsListCont").html(noadsmsg);
 
-            
+
             } else if (data.code === 201) { //boyo not logged in get him out of here!!
                 $("#myAdsListCont").load("signup_failure.html");
                 setTimeout(() => {
                     location = '/ExchangePlatform';
                 }, 2000);
-            
-            
+
+
             } else { //misc errors
                 const stwbad = `
                     <div class="jumbotron m-4">

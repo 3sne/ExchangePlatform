@@ -49,6 +49,7 @@ if (currentUserName != null) {
 
         .cont_desc {
             max-height: 8rem;
+            cursor: default;
             overflow: hidden;
         }
 
