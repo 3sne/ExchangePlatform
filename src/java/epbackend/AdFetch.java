@@ -99,13 +99,14 @@ public class AdFetch extends HttpServlet {
             if (this.adExcept.isEmpty()) {
                 adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id ORDER BY a.timestamp DESC limit ?";
                 prepAdFetch = con.prepareStatement(adFetchSql);
-                prepAdFetch.setString(1, this.maxAdCount);
+                System.out.println(this.maxAdCount);
+                prepAdFetch.setInt(1, Integer.parseInt(this.maxAdCount));
                 adResult = prepAdFetch.executeQuery();
             } else {
                 adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id where a.adid NOT IN(?) ORDER BY a.timestamp DESC limit ?";
                 prepAdFetch = con.prepareStatement(adFetchSql);
                 prepAdFetch.setString(1, this.adExcept);
-                prepAdFetch.setString(2, this.maxAdCount);
+                prepAdFetch.setInt(2, Integer.parseInt(this.maxAdCount));
                 adResult = prepAdFetch.executeQuery();
             }
 
