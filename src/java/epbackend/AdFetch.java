@@ -22,7 +22,7 @@ public class AdFetch extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     String maxAdCount = "";
-    String adExcept = "";
+    ArrayList<Integer> adExcId = new ArrayList<Integer>();
 
     public static class Data {
         public String max_ad_count;
@@ -55,6 +55,15 @@ public class AdFetch extends HttpServlet {
         return data;
     }
 
+    public static String convert(String sql, final int params) {
+        final StringBuilder sb = new StringBuilder(new String(new char[params]).replace("\0", "?,"));
+        sb.setLength(Math.max(sb.length() - 1, 0));
+        if (sb.length() > 1) {
+            sql = sql.replace("(?)", "(" + sb + ")");
+        }
+        return sql;
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
@@ -71,16 +80,19 @@ public class AdFetch extends HttpServlet {
                 sb.append(s);
             }
 
-            // setting up members
             Data d = this.processJsonAdReq(sb.toString());
+            this.adExcId.clear();
             this.maxAdCount = d.max_ad_count;
             for (int i = 0; i < d.ad_except.size(); i++) {
-                this.adExcept += d.ad_except.get(i).toString();
-                if (i + 1 != d.ad_except.size()) {
-                    this.adExcept += ",";
-                }
+                int temp = d.ad_except.get(i);
+                this.adExcId.add(temp);
             }
-            System.out.println("CURR EXCEPTIONS " + this.adExcept);
+
+            System.out.println("Exception LIST");
+            System.out.println("==============");
+            for (int i = 0; i < this.adExcId.size(); i++) {
+                System.out.println(this.adExcId.get(i));
+            }
 
             Connection con = DBConnector.getCon();
             if (con == null) {
@@ -94,17 +106,28 @@ public class AdFetch extends HttpServlet {
             PreparedStatement prepAdFetch;
 
             // preparing the Ad Fetch Query
-            if (this.adExcept.isEmpty()) {
+            if (this.adExcId.isEmpty()) {
                 adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id inner join adstatus as adst on a.adid=adst.adid WHERE adst.status=1 ORDER BY a.timestamp DESC limit ?";
                 prepAdFetch = con.prepareStatement(adFetchSql);
-                System.out.println(this.maxAdCount);
                 prepAdFetch.setInt(1, Integer.parseInt(this.maxAdCount));
                 adResult = prepAdFetch.executeQuery();
             } else {
                 adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id inner join adstatus as adst on a.adid=adst.adid where adst.status=1 AND a.adid NOT IN(?) ORDER BY a.timestamp DESC limit ?";
+                adFetchSql = convert(adFetchSql, this.adExcId.size());
                 prepAdFetch = con.prepareStatement(adFetchSql);
-                prepAdFetch.setString(1, this.adExcept);
-                prepAdFetch.setInt(2, Integer.parseInt(this.maxAdCount));
+                /*  
+                    *******************
+                    Fantastic way to do IN(?) queries. Using java.sql.Array in createArrayOf method. However, my JDBC Driver version don't support it :(
+                    Integer[] excArrTemp = this.adExcId.toArray(new
+                    Integer[this.adExcId.size()]);
+                    java.sql.Array excArr = con.createArrayOf("INTEGER", excArrTemp); 
+                    *******************
+                */
+                for (int i = 1; i <= this.adExcId.size(); i++) {
+                    prepAdFetch.setInt(i, this.adExcId.get(i - 1));
+                }
+                prepAdFetch.setInt(this.adExcId.size() + 1, Integer.parseInt(this.maxAdCount));
+                // System.out.println("QUERY >> " + prepAdFetch); // _DEBUG
                 adResult = prepAdFetch.executeQuery();
             }
 

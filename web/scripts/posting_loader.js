@@ -5,7 +5,7 @@ $(document).ready(() => {
     let row_id_indexer = 0;
     let ad_fetched_already = [];
     console.log("AAAAAAAAA ", ad_fetched_already);
-    const ad_fetch_url = 'http://localhost:8084/ExchangePlatform/adfetch';
+    const ad_fetch_url = 'adfetch';
     let ad_fetch_data = {
         'max_ad_count': '12',
         'ad_except': ad_fetched_already
@@ -71,6 +71,7 @@ $(document).ready(() => {
 
     $("#more_ad_loader").click(() => {
         epglobals.toggleSpinner("#ad_container_custom", "#loader", "d-none");
+        console.log("LoadMore BEFORE ", ad_fetched_already);
         $.ajax({
             url: ad_fetch_url,
             type: 'POST',
@@ -121,6 +122,7 @@ $(document).ready(() => {
                             $("#ad_row_" + i).append(appendAdHtmlCode);
                         }
                     }
+                    console.log("LoadMore AFTER ", ad_fetched_already);
                 } else {
                     console.log("No more ads to display :)");
                 }
