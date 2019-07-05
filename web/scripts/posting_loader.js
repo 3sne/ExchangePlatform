@@ -26,6 +26,11 @@ $(document).ready(() => {
                     $("#ad_container_custom").append('<div id="ad_row_' + i + '" class="row justify-content-center mt-3">');
                     for (let j = 0; j < 3; j++) {
                         let conc_obj = recvAdData.ad_list[i * 3 + j];
+
+                        if (conc_obj == null) {
+                            break;
+                        }
+
                         ad_fetched_already.push(conc_obj.ad_id);
                         let ad_id = conc_obj.ad_id;
                         let ad_poster_id = conc_obj.ad_poster_id;
@@ -89,6 +94,11 @@ $(document).ready(() => {
                             let index = (i - row_id_indexer) * 3 + j;
                             console.log(index);
                             let conc_obj = recvAdData.ad_list[index];
+                            
+                            if (conc_obj == null) {
+                                break;
+                            }
+                            
                             ad_fetched_already.push(conc_obj.ad_id);
 
                             let ad_id = conc_obj.ad_id;

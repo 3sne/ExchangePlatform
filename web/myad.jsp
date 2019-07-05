@@ -24,6 +24,7 @@ if (currentUserName != null) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title id="myad_page_title">Exchange Platform</title>
     <style>
         .mp-mat-sha-1 {
             transition: all 0.3s cubic-bezier(.25, .8, .25, 1);

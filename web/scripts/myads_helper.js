@@ -1,8 +1,9 @@
 $(document).ready(() => {
+    $("#myad_page_title").html(`
+        ${$("#session_uname_capture").val()}'s Ad Manager - ExchangePlatform
+    `);
     epglobals.toggleSpinner("#myAdsListCont", "#loader", "d-none");
-    const editClick = () => {
-
-    };
+    
     const myadsep = 'myAds';
     const myadpl = {
         data: {},

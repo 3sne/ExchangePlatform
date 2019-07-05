@@ -24,7 +24,7 @@ if (currentUserName != null) {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
-    <title>Exchange Platform</title>
+    <title id="zoom_page_title">My Ads - Exchange Platform</title>
     <style>
         body {
             overflow-x: hidden;

@@ -36,6 +36,7 @@ $(document).ready(() => {
                 let ad_location_state = conc_obj.ad_location_state;
                 let ad_status = conc_obj.ad_status;
 
+                $("#zoom_page_title").html(ad_title + ' - ExchangePlatform');
                 $("#ad_desc_holder").html(ad_desc);
                 $("#ad_title_holder").html(ad_title);
                 $("#ad_price_holder").html("&#8377; " + ad_price);
