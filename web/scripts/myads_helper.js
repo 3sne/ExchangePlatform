@@ -175,7 +175,7 @@ $(document).ready(() => {
                                 switch (data.code) {
                                     case 100: // success
                                         // 1.disable tooltip
-                                        $("#posting_card_" + posting_id).find('.mas-button').tooltip('hide');
+                                        $("#posting_card_" + posting_id).find('.trash-button').tooltip('hide');
                                         $("#posting_card_" + posting_id).remove();
                                         break;
 
