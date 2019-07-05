@@ -9,7 +9,7 @@ let getUrlVars = () => {
 $(document).ready(() => {
     epglobals.toggleSpinner("#zoom-container", "#loader", "d-none");
     let hrefparams = getUrlVars();
-    const posting_zoom_url = 'http://localhost:8084/ExchangePlatform/ad';
+    const posting_zoom_url = 'ad';
     console.log(posting_zoom_url);
     let posting_zoom_data = {
         'adid': hrefparams.id,
@@ -34,6 +34,7 @@ $(document).ready(() => {
                 let ad_location_id = conc_obj.ad_location_id;
                 let ad_location_city = conc_obj.ad_location_city;
                 let ad_location_state = conc_obj.ad_location_state;
+                let ad_status = conc_obj.ad_status;
 
                 $("#ad_desc_holder").html(ad_desc);
                 $("#ad_title_holder").html(ad_title);
@@ -41,6 +42,15 @@ $(document).ready(() => {
                 $("#ad_uname_holder").html(ad_poster_uname);
                 $("#ad_date_holder").html(ad_date);
                 $("#ad_location_blob").html(ad_location_city + ", " + ad_location_state);
+                if (ad_status == 1) {
+                    $("#ad_status_holder").removeClass("badge-dark");
+                    $("#ad_status_holder").addClass("badge-success");
+                    $("#ad_status_holder").html("ACTIVE");
+                } else if(ad_status == 0) {
+                    $("#ad_status_holder").removeClass("badge-dark");
+                    $("#ad_status_holder").addClass("badge-warning");
+                    $("#ad_status_holder").html("ALREADY SOLD");
+                }
 
                 epglobals.toggleSpinner("#zoom-container", "#loader", "d-none");
                 $("#site_footer").load("site_footer.html");

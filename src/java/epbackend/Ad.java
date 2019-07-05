@@ -38,6 +38,7 @@ public class Ad extends HttpServlet {
         String ad_desc;
         String ad_price;
         String ad_date;
+        String ad_status;
         String ad_location_id;
         String ad_location_city;
         String ad_location_state;
@@ -72,7 +73,7 @@ public class Ad extends HttpServlet {
                 return;
             }
 
-            String adFetchSql = "select a.adid, a.uid, u.uname, u.email, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.description, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id inner join user as u on u.uid=a.uid where a.adid=?";
+            String adFetchSql = "select a.adid, a.uid, u.uname, u.email, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.description, a.price, date(a.timestamp) as tarikh, adst.status from ads as a inner join cities as c on c.city_id=a.city_id inner join user as u on u.uid=a.uid inner join adstatus as adst on a.adid=adst.adid where a.adid=?";
             PreparedStatement prepAdFetch = con.prepareStatement(adFetchSql);
             prepAdFetch.setString(1, req_ad_id);
             ResultSet adResult = prepAdFetch.executeQuery();
@@ -88,6 +89,7 @@ public class Ad extends HttpServlet {
                 pze.ad_desc = adResult.getString("a.description");
                 pze.ad_price = adResult.getString("a.price");
                 pze.ad_date = adResult.getString("tarikh");
+                pze.ad_status = adResult.getString("adst.status");
                 pze.ad_location_id = adResult.getString("a.city_id");
                 pze.ad_location_city = adResult.getString("c.city_name");
                 pze.ad_location_state = adResult.getString("c.city_state");

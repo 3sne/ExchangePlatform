@@ -95,13 +95,13 @@ public class AdFetch extends HttpServlet {
 
             // preparing the Ad Fetch Query
             if (this.adExcept.isEmpty()) {
-                adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id ORDER BY a.timestamp DESC limit ?";
+                adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id inner join adstatus as adst on a.adid=adst.adid WHERE adst.status=1 ORDER BY a.timestamp DESC limit ?";
                 prepAdFetch = con.prepareStatement(adFetchSql);
                 System.out.println(this.maxAdCount);
                 prepAdFetch.setInt(1, Integer.parseInt(this.maxAdCount));
                 adResult = prepAdFetch.executeQuery();
             } else {
-                adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id where a.adid NOT IN(?) ORDER BY a.timestamp DESC limit ?";
+                adFetchSql = "select a.adid, a.uid, a.cid, a.city_id, c.city_name, c.city_state, a.title, a.price, date(a.timestamp) as tarikh from ads as a inner join cities as c on c.city_id=a.city_id inner join adstatus as adst on a.adid=adst.adid where adst.status=1 AND a.adid NOT IN(?) ORDER BY a.timestamp DESC limit ?";
                 prepAdFetch = con.prepareStatement(adFetchSql);
                 prepAdFetch.setString(1, this.adExcept);
                 prepAdFetch.setInt(2, Integer.parseInt(this.maxAdCount));

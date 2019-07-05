@@ -196,11 +196,9 @@ if (currentUserName != null) {
                     </div>
                 </div>
                 <div class="card mp-mat-sha-1 mt-4">
-                    <div class="card-body">
-                        <h2 class="">Placeholder Card</h1>
-                        <p class="text-left h5 text-muted" >
-                            This card is here because I may incorporate new features and stuff/
-                        </p>
+                    <div class="card-body clearfix">
+                        <h1 class="h2 d-inline">Listing Status</h1>
+                        <h1 class="h5"><span id="ad_status_holder" class="badge badge-dark" style="position:absolute; right:2rem; top: 50%; transform: translateY(-50%);"></span></h1>
                     </div>
                 </div>
             </div>

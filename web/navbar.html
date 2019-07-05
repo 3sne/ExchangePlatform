@@ -212,6 +212,7 @@
                 },
                 success: (data) => {
                     let sResp = $.parseJSON(data);
+                    $("#login-modal-err-zone").empty();
                     if (sResp.code === 100) {
                         console.log("[AJAX] Login Successful");
                         console.log("OUR USER IS: ", sResp.username);
