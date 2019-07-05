@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
     //Ad Loader
-    epglobals.toggleSpinner("#ad_container_custom", "#loader", "d-none");
+    $("#loader").removeClass("d-none");
     let row_id_indexer = 0;
     let ad_fetched_already = [];
     console.log("AAAAAAAAA ", ad_fetched_already);
@@ -19,7 +19,7 @@ $(document).ready(() => {
         success: (data) => {
             recvAdData = data;
             console.log(recvAdData);
-            epglobals.toggleSpinner("#ad_container_custom", "#loader", "d-none");
+            $("#loader").addClass("d-none");
             if (recvAdData.code == 100) {
                 for (let i = row_id_indexer; i < row_id_indexer + 4; i++) {
                     $("#ad_row_" + i).html('');
@@ -70,7 +70,7 @@ $(document).ready(() => {
     });
 
     $("#more_ad_loader").click(() => {
-        epglobals.toggleSpinner("#ad_container_custom", "#loader", "d-none");
+        $("#loader").removeClass("d-none");
         console.log("LoadMore BEFORE ", ad_fetched_already);
         $.ajax({
             url: ad_fetch_url,
@@ -80,7 +80,7 @@ $(document).ready(() => {
             success: (data) => {
                 recvAdData = data;
                 console.log(recvAdData);
-                epglobals.toggleSpinner("#ad_container_custom", "#loader", "d-none");
+                $("#loader").addClass("d-none");
                 if (recvAdData.code == 100) {
                     for (let i = row_id_indexer; i < row_id_indexer + 4; i++) {
                         $("#ad_row_" + i).html('');
