@@ -23,10 +23,10 @@ public class DBConnector {
             connection = DriverManager.getConnection(db_url, db_worker_name, db_worker_password);
             System.out.println("[DB Connector] Connection Successful");
         } catch (ClassNotFoundException ex) {
-            System.out.println("Oopsie1");
+            System.out.println("[DB Connector] Something wrong with JDBC Driver, no connection to DB!");
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            System.out.println("Oopsie2");
+            System.out.println("[DB Connector] Sql Error, no connection to DB!");
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
